@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.Clip"
+		select-before-update="true" table="RBT_CLIPS">
+		<id column="CLIP_ID" name="clipId" type="int"></id>
+		<property column="CLIP_NAME" length="500" name="clipName" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_NAME_WAV_FILE" length="500" name="clipNameWavFile" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_PREVIEW_WAV_FILE" length="500" name="clipPreviewWavFile" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_RBT_WAV_FILE" length="500" name="clipRbtWavFile" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" update="false"/>
+		<property column="CLIP_GRAMMAR" length="500" name="clipGrammar" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_SMS_ALIAS" length="500" name="clipSmsAlias" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="ADD_TO_ACCESS_TABLE" name="addToAccessTable" type="char" />
+		<property column="CLIP_PROMO_ID" length="50" name="clipPromoId" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLASS_TYPE" length="50" name="classType" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_START_TIME" name="clipStartTime" type="java.util.Date" />
+		<property column="CLIP_END_TIME" name="clipEndTime" type="java.util.Date" />
+		<property column="SMS_START_TIME" name="smsStartTime" type="java.util.Date" />
+		<property column="ALBUM" length="500" name="album" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="LANGUAGE" length="50" name="language" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_DEMO_WAV_FILE" length="500" name="clipDemoWavFile" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="ARTIST" length="500" name="artist" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CLIP_INFO" length="500" name="clipInfo" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CONTENT_TYPE" length="50" name="contentType" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="VCODE" length="8000" name="clipVcode" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="LAST_MODIFIED_TIME" name="lastModifiedTime" type="java.util.Date" />
+		<set name="clipInfoSet" cascade="all" lazy="false" inverse="true" fetch="join">
+			<key column="CLIP_ID" not-null="true"/>
+			<one-to-many class="com.onmobile.apps.ringbacktones.rbtcontents.beans.ClipInfo"/>
+			 
+		</set>   
+	</class>
+	
+</hibernate-mapping>

@@ -1,0 +1,2 @@
+ <%=(String)request.getAttribute("response")%>
+ 

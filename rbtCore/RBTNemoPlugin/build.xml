@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<project name="${project.name}" default="all" basedir=".">
+
+	<!--
+	  * Definitions on the "ant" command line (ant -Dfoo=bar compile).
+	  * Definitions present in the build.properties file
+	-->
+
+	<property file="build.properties" />
+
+	<property environment="env"/>
+	<property name="JDK5" value="${env.RBT_JAVA_HOME}"/>
+	<!-- 	paths used for compilation and run	-->
+
+	<path id="lib.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="all" depends="jar" description="Default target to build the jar file">
+	</target>
+
+	<target name="clean" description="Cleans all the classes and output directories">
+		<echo message="Cleaning the build directory" />
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="init" description="Making all the temp directories" depends="clean">
+		<echo message="Creating the necessary directories for build" />
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+	</target>
+
+	<target name="compile" description="Compiling all the source files" depends="init">
+		<echo message="Compiling the source files to ${classes.dir} directory" />
+		<!-- Compile the classes -->
+		<javac destdir="${classes.dir}"
+			deprecation="${javac.deprecation}"
+			debug="${javac.debug}"
+			executable="${JDK5}/bin/javac"
+			compiler="javac1.6"
+			source="1.6"
+			fork="yes">
+			<src path="${src.dir}"/>
+			<include name="com/rbt/webservice/nemo/**"/>
+			<classpath refid="lib.path"/>
+		</javac>
+	</target>
+
+	<target name="jar" description="Creating the jar file ${project.name}.jar" depends="compile">
+		<echo message="Creating the ${project.name}.jar file in ${build.dir} folder" />
+		<jar destfile="${build.dir}/${project.name}.jar">
+			<fileset dir="${classes.dir}"/>
+		</jar>
+	</target>
+
+	<target name="RBTNemoPluginJarCompile" description="Compiling all the source files" depends="init">
+		<echo message="Compiling the source files to ${classes.dir} directory" />
+		<!-- Compile the classes -->
+		<javac destdir="${classes.dir}"
+            deprecation="${javac.deprecation}"
+            debug="${javac.debug}"
+     		source="1.6">
+			<src path="${src.dir}"/>
+			<classpath refid="lib.path"/>
+		</javac>
+	</target>
+
+	<target name="makeRBTNemoPluginJar" description="Creating the jar file ${project.name}.jar" depends="RBTNemoPluginJarCompile">
+		<echo message="Creating the ${project.name}.war file in ${build.dir} folder" />
+		<copy todir="${classes.dir}" >
+			<fileset dir="${src.dir}">
+			</fileset>
+		</copy>
+		<jar destfile="${build.dir}/${project.name}.jar">
+			<fileset dir="${classes.dir}"/>
+		</jar>
+	</target>
+
+</project>

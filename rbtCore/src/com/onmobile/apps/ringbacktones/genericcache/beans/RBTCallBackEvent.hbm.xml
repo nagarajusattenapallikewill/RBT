@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.onmobile.apps.ringbacktones.genericcache.beans">
+  <class name="RBTCallBackEvent" table="RBT_CALL_BACK_EVENT">
+  	<id name="sequenceID" column="SEQUENCE_ID" unsaved-value="0" type="java.lang.Long"><generator class="native"/></id>
+    <property column="SUBSCRIBER_ID" length="16" name="subscriberID" type="java.lang.String" />
+    <property column="MODULE_ID" length="1" name="moduleID" type="integer" />
+	<property column="EVENT_TYPE" name="eventType" type="integer" />
+	<property column="CLIP_ID" name="clipID" type="integer" />
+	<property column="CLASS_TYPE" name="classType" type="java.lang.String" />
+	<property column="SELECTED_BY" name="selectedBy" type="java.lang.String" />
+	<property column="SELECTION_INFO" name="selectionInfo" type="java.lang.String" />
+	<property column="MESSAGE" name="message" type="java.lang.String" />
+  </class>
+</hibernate-mapping>

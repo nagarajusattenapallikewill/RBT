@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.SitePrefix" table="RBT_SITE_PREFIX">
+		<id name="circleID" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString">
+			<column name="CIRCLE_ID" not-null="true" />
+		</id>
+
+		<property column="SITE_NAME" length="100" name="siteName" type="java.lang.String" />
+		<property column="SITE_PREFIX" length="3000" name="sitePrefix" type="java.lang.String" />
+		<property column="SITE_URL" length="500" name="siteUrl" type="java.lang.String" />
+		<property column="ACCESS_ALLOWED" length="10" name="accessAllowed" type="java.lang.String" />
+		<property column="SUPPORTED_LANG" length="64" name="supportedLanguage" type="java.lang.String" />
+		<property column="PLAYER_URL" length="100" name="playerUrl" type="java.lang.String" />
+		<property column="PLAY_UNCHARGED" length="1" name="playerUncharged" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

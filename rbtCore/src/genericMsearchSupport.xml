@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+        http://www.springframework.org/schema/oxm  
+        http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+
+	<!-- <oxm:jaxb2-marshaller id="jaxBMarshallerBean"> <oxm:class-to-be-bound 
+		name="com.onmobile.rbtmsearch.beans.Response" /> </oxm:jaxb2-marshaller> -->
+
+	<bean id="xmlProcess" class="com.onmobile.apps.ringbacktones.lucene.generic.msearch.application.XMLProcess"
+		scope="prototype">
+		<property name="marshaller" ref="jaxBMarshallerBean"></property>
+		<property name="unMarshaller" ref="jaxBMarshallerBean"></property>
+	</bean>
+
+	<bean id="springApp" class="com.onmobile.apps.ringbacktones.lucene.generic.msearch.application.SpringApp"
+		scope="prototype" />
+
+	<bean id="jaxBMarshallerBean" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeBound">
+			<list>
+				<value>com.onmobile.apps.ringbacktones.lucene.generic.msearch.beans.RBTMSearchResponse</value>
+			</list>
+		</property>
+		<!-- Use below property while Unmarshalling to get a formatted output -->
+		<!-- <property name="marshallerProperties"> <map> <entry key="jaxb.formatted.output"> 
+			<value type="java.lang.Boolean">true</value> </entry> </map> </property> -->
+	</bean>
+
+	<bean id="rbtMSearchImpl" class="com.onmobile.apps.ringbacktones.lucene.generic.msearch.searchimpl.RBTMSearchImpl"
+		scope="prototype" />
+
+	<bean id="rbtMSearchUtil" class="com.onmobile.rbtmsearch.utility.RBTMSearchUtil"
+		scope="prototype" />
+
+	<bean id="rbtMSearchParams" class="com.onmobile.apps.ringbacktones.lucene.generic.msearch.beans.RBTMSearchParams"
+		scope="prototype" />
+
+
+	<bean id="xmlResponseHandlerImpl" class="com.onmobile.rbtmsearchImpl.XMLResponseHandlerImpl"
+		scope="prototype" />
+	<bean id="csvResponseHandlerImpl" class="com.onmobile.rbtmsearchImpl.CSVResponseHandlerImpl"
+		scope="prototype" />
+	<bean id="jsonResponseHandlerImpl" class="com.onmobile.rbtmsearchImpl.JSONResponseHandlerImpl"
+		scope="prototype" />
+
+</beans>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.daemons.interoperator.bean.InterOperatorCopyRequestBean" table="RBT_INTER_OPERATOR_COPY_REQUEST">
+		<meta attribute="class-description">
+			This class contains the inter operator copy requests.
+		</meta>
+		
+		
+		<!--
+		COPY_ID
+		STATUS
+		COPIER_MDN
+		COPIER_OPERATOR_ID
+		TARGET_CONTENT_ID
+		REQUEST_TIME
+		COPIEE_MDN
+		COPIEE_OPERATOR_ID
+		SOURCE_CONTENT_ID
+		COPY_TYPE
+		KEY_PRESSED
+		MNP_REQUEST_TIME
+		MNP_RESPONSE_TIME
+		CONTENT_RESOLVE_TIME
+		TRANSFER_RETRY_COUNT
+		REQUEST_TRANSFER_TIME
+		MNP_REQUEST_TYPE
+		MNP_RESPONSE_TYPE
+		SOURCE_CONTENT_DETAILS
+		SOURCE_SONG_NAME
+		SOURCE_PROMO_CODE
+		SOURCE_MODE
+		INFO
+		
+		
+		integer, string, character, date, timestamp, float, binary, serializable, object, blob
+		status:
+			0=new
+			1=copier operator identification pending
+			2=copier operator identified success
+			3=copier operator identification failed
+			4=content identified success
+			5=content identified failed
+			6=request transferred success
+			7=request transferred failed
+			
+			
+			
+		-->
+		
+		
+		
+		<id name="copyId" type="long" column="COPY_ID">
+			<generator class="native"/>
+		</id>
+		
+		
+		
+		<property name="status" type="integer" column="STATUS" />
+		<property name="copierMdn" type="long" column="COPIER_MDN" not-null="true" />
+		<property name="copierOperatorId" type="integer" column="COPIER_OPERATOR_ID" />
+		<property name="targetContentId" type="string" column="TARGET_CONTENT_ID" />
+		<property name="requestTime" type="timestamp" column="REQUEST_TIME" not-null="true" />
+		<property name="copieeMdn" type="long" column="COPIEE_MDN" not-null="true" />
+		<property name="copieeOperatorId" type="integer" column="COPIEE_OPERATOR_ID" not-null="true" />
+		<property name="sourceContentId" type="string" column="SOURCE_CONTENT_ID" />
+		<property name="copyType" type="string" column="COPY_TYPE"  />
+		<property name="keyPressed" type="string" column="KEY_PRESSED"  />
+		<property name="mnpRequestTime" type="timestamp" column="MNP_REQUEST_TIME"  />
+		<property name="mnpResponseTime" type="timestamp" column="MNP_RESPONSE_TIME"  />
+		<property name="contentResolveTime" type="timestamp" column="CONTENT_RESOLVE_TIME"  />
+		<property name="requestTransferTime" type="timestamp" column="REQUEST_TRANSFER_TIME"  />
+		<property name="transferRetryCount" type="integer" column="TRANSFER_RETRY_COUNT" />
+		<property name="mnpRequestType" type="string" column="MNP_REQUEST_TYPE"  />
+		<property name="mnpResponseType" type="string" column="MNP_RESPONSE_TYPE"  />
+		<property name="sourceContentDetails" type="string" column="SOURCE_CONTENT_DETAILS" />
+		<property name="sourceSongName" type="string" column="SOURCE_SONG_NAME" />
+		<property name="sourcePromoCode" type="string" column="SOURCE_PROMO_CODE" />
+		<property name="sourceMode" type="string" column="SOURCE_MODE" />
+		<property name="info" type="string" column="INFO" />
+	</class>
+</hibernate-mapping>

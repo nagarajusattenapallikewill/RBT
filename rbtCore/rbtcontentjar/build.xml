@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<project name="${content.project.name}" default="all" basedir=".">
+
+	<!--
+	  * Definitions on the "ant" command line (ant -Dfoo=bar compile).
+	  * Definitions present in the build.properties file
+	-->
+
+	<property file="rbtContentJarbuild.properties" />
+
+	<property environment="env"/>
+	<property name="JDK5" value="${env.RBT_JAVA_HOME}"/>
+	<!-- 	paths used for compilation and run	-->
+
+	<path id="lib.path">
+		<fileset dir="${content.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${content.libext.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="all" depends="jar" description="Default target to build the jar file">
+	</target>
+
+	<target name="clean" description="Cleans all the classes and output directories">
+		<echo message="Cleaning the build directory" />
+		<delete dir="${content.build.dir}"/>	
+	</target>
+	
+	<target name="init" description="Making all the temp directories" depends="clean">
+		<echo message="Creating the necessary directories for build" />
+		<mkdir dir="${content.build.dir}"/>	
+		<mkdir dir="${classes.dir}"/>
+	</target>
+	
+	<target name="compile" description="Compiling all the source files" depends="init">
+		<echo message="Compiling the source files to ${classes.dir} directory" />
+
+		<!-- Compile the classes -->
+		<javac destdir="${classes.dir}"
+			deprecation="${javac.deprecation}"
+			debug="${javac.debug}"
+			executable="${JDK5}/bin/javac"
+			compiler="javac1.6"
+			source="1.6">
+			<src path="${basedir}/../src"/>
+			<include name="com/onmobile/apps/ringbacktones/common/**"/>
+			<src path="${src.dir}"/>
+			<include name="com/onmobile/apps/ringbacktones/rbtcontents/**"/>			
+			<classpath refid="lib.path"/>
+		</javac>
+	</target>
+	
+	<target name="jar" description="Creating the jar file ${content.project.name}.jar" depends="compile">
+		<echo message="Creating the ${content.project.name}.war file in ${content.build.dir} folder" />
+		<copy todir="${classes.dir}" >
+		   	<fileset dir="${src.dir}">
+		       	<include name="**/*.hbm.xml"/>
+			</fileset>
+		</copy>		
+		<jar destfile="${content.build.dir}/${content.project.name}.jar">
+		 	<fileset dir="${classes.dir}">
+				<include name="com/onmobile/apps/ringbacktones/rbtcontents/**"/>
+			</fileset>
+		</jar>
+		<copy file="${content.build.dir}/${content.project.name}.jar" todir="${content.lib.dir}"/>
+	</target>
+
+
+	<target name="contentJarCompile" description="Compiling all the source files" depends="init">
+		<echo message="Compiling the source files to ${classes.dir} directory" />
+
+			<!-- Compile the classes -->
+		<javac destdir="${classes.dir}"
+            deprecation="${javac.deprecation}"
+            debug="${javac.debug}"
+     		source="1.6">
+     		<src path="${src.dir}"/>
+            <classpath refid="lib.path"/>
+        </javac>
+   
+	</target>
+
+	
+	<target name="makeContentJar" description="Creating the jar file ${content.project.name}.jar" depends="contentJarCompile">
+		<echo message="Creating the ${content.project.name}.war file in ${content.build.dir} folder" />
+		<copy todir="${classes.dir}" >
+		   	<fileset dir="${src.dir}">
+			</fileset>
+		</copy>		
+		<jar destfile="${content.build.dir}/${content.project.name}.jar">
+		 	<fileset dir="${classes.dir}"/>
+		</jar>
+	</target>
+
+
+	</project>

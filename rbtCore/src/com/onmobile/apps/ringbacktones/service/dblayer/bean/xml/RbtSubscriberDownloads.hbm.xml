@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.bean.RbtSubscriberDownloads" table="RBT_SUBSCRIBER_DOWNLOADS">
+		
+		<id name="refId" type="long" column="INTERNAL_REF_ID" />
+		</id>
+       	<property column="SUBSCRIBER_ID" name="subscriberId" type="string" />
+		<property column="TYPE" name="promoId" type="string" />
+		<property column="STATUS" name="downloadStatus" type="character" />
+		<property column="EXTRA_INFO" name="setTime" type="timestamp" />
+		<property column="MODE" name="startTime" type="timestamp" />
+		<property column="MODE_INFO" name="endTime" type="timestamp" />
+		<property column="TRANS_ID" name="categoryID" type="integer" />
+		<property column="CHARGING_CLASS" name="deactivatedBy" type="string" />
+		<property column="CREATION_TIME" name="categoryType" type="integer" />
+		<property column="NEXT_RETRY_TIME" name="classType" type="string" />
+		<property column="RETRY_COUNT" name="selectedBy" type="string" />
+		<property column="SUBSCRIBER_ID" name="deselectedBy" type="string" />
+		<property column="TYPE" name="extraInfo" type="string" />
+		<property column="STATUS" name="selectionInfo" type="string" />
+	</class>
+</hibernate-mapping>

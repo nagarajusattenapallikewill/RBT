@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.Category" select-before-update="true" table="RBT_CATEGORIES">
+		<id column="CATEGORY_ID" name="categoryId" type="int"></id>
+		<property column="CATEGORY_NAME" length="500" name="categoryName" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_NAME_WAV_FILE" length="500" name="categoryNameWavFile" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_PREVIEW_WAV_FILE" length="500" name="categoryPreviewWavFile" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_GRAMMAR" length="500" name="categoryGrammar" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_TYPE" name="categoryTpe" type="int" />
+		<property column="CATEGORY_ASK_MOBILE_NUMBER" name="categoryAskMobileNumber" type="char" />
+		<property column="CATEGORY_GREETING" length="500" name="categoryGreeting" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_START_TIME" name="categoryStartTime" type="java.util.Date" />
+		<property column="CATEGORY_END_TIME" name="categoryEndTime" type="java.util.Date" />
+		<property column="CLASS_TYPE" length="50" name="classType" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_PROMO_ID" length="50" name="categoryPromoId" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_SMS_ALIAS" length="500" name="categorySmsAlias" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="MM_NUMBER" length="10" name="mmNumber" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="CATEGORY_INFO" length="150" name="categoryInfo" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="LAST_MODIFIED_TIME" name="lastModifiedTime" type="java.util.Date" />
+		<set name="categoryInfoSet" cascade="all" lazy="false" inverse="true" fetch="join">
+			<key column="CATEGORY_ID" not-null="true"/>
+			<one-to-many class="com.onmobile.apps.ringbacktones.rbtcontents.beans.CategoryInfo"/>
+		</set>
+	</class>
+</hibernate-mapping>
+
+
+

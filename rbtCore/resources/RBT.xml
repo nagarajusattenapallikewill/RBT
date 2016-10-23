@@ -1,0 +1,35 @@
+<RBT>
+	<Common>
+		<property name="DB_URL" value="192.168.21.78/mmp?sqlmode=ORACLE&amp;user=onmobile&amp;password=onmobile" />
+		<property name="VALID_PREFIX" value="9845,9886" />
+		<property name="SELECTION_TYPE" value="TONES" />
+		<property name="AUTO_DEACTIVATION_PERIOD" value="45" />
+		<property name="FREE_SELECTIONS" value="3" />
+		<property name="REDIRECT_APPLICATION_NAME" value="com.onmobile.apps.auditionrevolution.vui. SOAuditionRevolutionManager" />
+	</Common>
+	<SMS>
+		<property name="VALID_IP" value="127.0.0.1,192.168.21.78" />
+		<property name="SMS_NO" value="123" />
+		<property name="SMS_HOST" value="192.168.21.78" />
+		<property name="SMS_PORT" value="1099" />
+		<property name="ACTIVATION_KEYWORD" value="SUBSCRIBE,SUB,ACT,ACTIVATE" />
+		<property name="DEACTIVATION_KEYWORD" value="UNSUBSCRIBE,UNSUB,DEACT,DEACTIVATE,CAN,CANCEL" />
+		<property name="RBT_KEYWORD" value="RBT" />
+		<property name="SEND_SMS" value="FALSE" />
+		<property name="PUT_PAGE_NO_AT_START" value="TRUE"/>
+		<property name="ACTIVATION_SUCCESS_TEXT" value="Your request has been received. You will be activated in the next 24 hours. Call 123 and say 'Caller Tunes' to make your selections" />
+		<property name="ACTIVATION_FAILURE_TEXT" value="You are already active on 'Caller Tunes'. Please call 123 and say 'Caller Tunes' to select your tunes." />
+		<property name="DEACTIVATION_SUCCESS_TEXT" value="Your request has been received. You will be deactivated in the next 24 hours" />
+		<property name="DEACTIVATION_FAILURE_TEXT" value="You have not yet subscribed to 'Caller Tunes'. To subscribe send ACT CT as an SMS to 123" />
+		<property name="ERROR_TEXT" value="You are not subscribed to 'Caller Tunes'." />
+		<property name="HELP_TEXT" value="To subscribe, type ACT CT and SMS to 123. To unsubscribe, type DEACT CT and SMS to 123" />
+		<property name="INVALID_PREFIX_TEXT" value="You are not authorized to use the 'Caller Tunes' service. We apologize the inconvenience" />
+		<property name="TECHNICAL_FAILURE_TEXT" value="I am sorry, we are having some technical difficulties. Please try later" />
+		<property name="REMOTE_PREFIX" value="" />
+		<property name="REMOTE_URL" value="" />
+	</SMS>
+	
+	<VoiceRecord>
+		<property name="AUD_REV_ID" value ="NULL" />		
+	</VoiceRecord>
+</RBT>

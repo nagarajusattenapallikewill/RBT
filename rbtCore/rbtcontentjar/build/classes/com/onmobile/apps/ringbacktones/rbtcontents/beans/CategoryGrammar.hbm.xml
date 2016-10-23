@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.CategoryGrammar" select-before-update="true" table="RBT_CATEGORY_GRAMMAR">
+		<composite-id>
+			<key-property column="CATEGORY_ID" name="categoryId" type="int" />
+			<key-property column="LANGUAGE" name="language" type="java.lang.String" />
+		</composite-id>
+		<property column="GRAMMAR" length="255" name="grammar" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+	</class>
+</hibernate-mapping>

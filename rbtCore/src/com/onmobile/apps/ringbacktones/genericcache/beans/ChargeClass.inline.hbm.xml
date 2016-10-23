@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.ChargeClass" table="RBT_CHARGE_CLASS">
+		<id name="chargeClass" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString">
+			<column name="CLASS_TYPE" not-null="true" />
+		</id>
+
+		<property column="CIRCLE_ID" length="50" name="circleID" type="java.lang.String" />
+		<property column="AMOUNT" length="10" name="amount" type="java.lang.String" />
+		<property column="OPERATOR_CODE" length="50" name="operatorCode" type="java.lang.String" />
+		<property column="PROVIDER_CODE" length="50" name="providerCode" type="java.lang.String" />
+		<property column="FREE_SELECTIONS" length="11" name="freeSelection" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="SELECTION_TYPE" length="50" name="selectionType" type="java.lang.String" />
+		<property column="SELECTION_PERIOD" length="10" name="selectionPeriod" type="java.lang.String" />
+		<property column="OPERATORCODE1" length="50" name="operatorCode1" type="java.lang.String" />
+		<property column="OPERATORCODE2" length="50" name="operatorCode2" type="java.lang.String" />
+		<property column="RENEWAL_PERIOD" length="10" name="renewalPeriod" type="java.lang.String" />
+		<property column="RENEWAL_AMOUNT" length="10" name="renewalAmount" type="java.lang.String" />
+		<property column="SMS_CHARGE_SUCCESS" length="160" name="smschargeSuccess" type="java.lang.String" />
+		<property column="SMS_CHARGE_FAILURE" length="160" name="smschargeFailure" type="java.lang.String" />
+		<property column="SMS_RENEWAL_SUCCESS" length="160" name="smsrenewalSuccess" type="java.lang.String" />
+		<property column="SMS_RENEWAL_FAILURE" length="160" name="smsrenewalFailure" type="java.lang.String" />
+		<property column="SHOW_ON_GUI" length="1" name="showonGui" type="java.lang.String" />
+		<property column="PROVISIONING_FLOW" length="20" name="provisioningFlow" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

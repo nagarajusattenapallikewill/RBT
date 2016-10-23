@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<display-name>ccc</display-name>
+	<listener>
+		<listener-class>com.onmobile.apps.ringbacktones.ussd.USSDServletListner
+		</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>ussd</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.ussd.USSDRequestHandler</servlet-class>
+		<init-param>
+			<param-name>trimSpaces</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ussd</servlet-name>
+		<url-pattern>/ussd.do</url-pattern>
+	</servlet-mapping>
+	<init-param>
+			<param-name>trimSpaces</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
+</web-app>

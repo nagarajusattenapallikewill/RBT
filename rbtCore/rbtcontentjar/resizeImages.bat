@@ -1,0 +1,1 @@
+java -cp lib/log4j-1.2.12.jar;lib/rbtcontent.jar; com.onmobile.apps.ringbacktones.rbtcontents.utils.ImageResize

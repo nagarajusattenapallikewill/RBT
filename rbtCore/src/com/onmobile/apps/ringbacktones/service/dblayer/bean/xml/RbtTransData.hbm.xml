@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.bean.RbtTransData" table="RBT_TRANS_DATA">
+		
+		<id name="transId" type="string" column="TRANS_ID" />
+		</id>
+       	<property column="SUBSCRIBER_ID" name="subscriberId" type="string" />
+		<property column="TRANS_DATE" name="transDate" type="timestamp" />
+		<property column="TYPE" name="type" type="string" />
+		<property column="ACCESS_COUNT" name="accessCount" type="string" />
+	</class>
+</hibernate-mapping>

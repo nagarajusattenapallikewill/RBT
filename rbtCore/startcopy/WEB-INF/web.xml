@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<!--
+Automatically created by Tomcat JspC.
+-->
+<web-app>
+
+	<servlet>
+	     <description>
+		process start copy records </description>
+		<servlet-name>startcopy</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.StartCopy</servlet-class>
+	</servlet>
+
+<servlet-mapping>
+		<servlet-name>startcopy</servlet-name>
+		<url-pattern>/startcopy.jsp</url-pattern>
+	</servlet-mapping>
+
+</web-app>
+

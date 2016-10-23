@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.beans.RbtPickOfTheDay" table="RBT_PICK_OF_THE_DAY">
+		
+		<id name="requestId" type="long" column="REQUEST_ID" />
+			<generator class="increment"/>
+		</id>
+       	<property column="SUBSCRIBER_ID" name="subscriberId" type="string" />
+		<property column="TYPE" name="type" type="integer" />
+		<property column="STATUS" name="status" type="integer" />
+		<property column="EXTRA_INFO" name="extraInfo" type="string" />
+		<property column="MODE" name="mode" type="string" />
+		<property column="MODE_INFO" name="modeInfo" type="string" />
+		<property column="TRANS_ID" name="transId" type="string" />
+		<property column="CHARGING_CLASS" name="chargingClass" type="string" />
+		<property column="CREATION_TIME" name="creationTime" type="timestamp" not-null="true" />
+		<property column="NEXT_RETRY_TIME" name="nextRetryTime" type="timestamp" />
+		<property column="RETRY_COUNT" name="retryCount" type="integer" />
+	</class>
+</hibernate-mapping>

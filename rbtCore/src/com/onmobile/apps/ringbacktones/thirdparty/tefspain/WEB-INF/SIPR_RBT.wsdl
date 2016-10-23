@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:impl="http://localhost/SIPR_RBT.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://localhost/SIPR_RBT.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/SIPR_RBT.wsdl">
+	
+	<wsdl:types>
+    		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/SIPR_RBT.wsdl">
+    	
+   			<complexType name="ArrayOf_xsd_string">
+    				<complexContent>
+     				<restriction base="soapenc:Array">
+      					<attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     				</restriction>
+    				</complexContent>
+   			</complexType>
+    		</schema>
+  	</wsdl:types>
+  	
+  	
+  	
+	<wsdl:message name="AltaSuscriptorEmpresaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+		<wsdl:part name="melodia" type="xsd:int"/>
+		<wsdl:part name="tipoUsuario" type="xsd:int"/>
+		<wsdl:part name="franjaHoraria" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="AltaSuscriptorEmpresaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ConsultaSuscriptorEmpresaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ConsultaSuscriptorEmpresaResponse">
+		<wsdl:part name="res" type="tns:ArrayOf_xsd_string"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ModificaSuscriptorEmpresaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+		<wsdl:part name="melodia" type="xsd:int"/>
+		<wsdl:part name="tipoUsuario" type="xsd:int"/>
+		<wsdl:part name="franjaHoraria" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ModificaSuscriptorEmpresaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+
+	<wsdl:message name="BajaSuscriptorEmpresaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+		<wsdl:part name="melodia" type="xsd:int"/>
+	</wsdl:message>
+	<wsdl:message name="BajaSuscriptorEmpresaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ConfirmAltaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ConfirmAltaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ConfirmBajaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ConfirmBajaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CambioMSISDNRequest">
+		<wsdl:part name="ViejoMSISDN" type="xsd:string"/>
+		<wsdl:part name="NuevoMSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="CambioMSISDNResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="BajaServicioRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="BajaServicioResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ConsultaEstadoRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ConsultaEstadoResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="RespuestaAltaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+		<wsdl:part name="resul" type="xsd:int"/>
+	</wsdl:message>
+	<wsdl:message name="RespuestaAltaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="RespuestaBajaRequest">
+		<wsdl:part name="MSISDN" type="xsd:string"/>
+		<wsdl:part name="resul" type="xsd:int"/>
+	</wsdl:message>
+	<wsdl:message name="RespuestaBajaResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="AltaRBTCCRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+ 		<wsdl:part name="id_melodia" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="AltaRBTCCResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>	
+
+	<wsdl:message name="BajaRBTCCRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+ 		<wsdl:part name="indEmpresa" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="BajaRBTCCResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>	
+
+	<wsdl:message name="CompraRBTCCRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+ 		<wsdl:part name="FecCompra" type="xsd:string"/>
+ 		<wsdl:part name="id_melodia" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="CompraRBTCCResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>	
+			
+	<wsdl:message name="AltaRBTPubliCCRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="AltaRBTPubliCCResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+	
+	<wsdl:message name="BajaRBTPubliCCRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="BajaRBTPubliCCResponse">
+		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>	
+
+	<wsdl:message name="ConsultaRBTPrecioRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+ 		<wsdl:part name="id_melodia" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ConsultaRBTPrecioResponse">
+ 		<wsdl:part name="res" type="tns:ArrayOf_xsd_string"/>
+	</wsdl:message>
+
+	<wsdl:message name="ConsultaRBTDefectoRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="ConsultaRBTDefectoResponse">
+ 		<wsdl:part name="id_melodia_defecto" type="xsd:string"/>
+	</wsdl:message>
+
+	<wsdl:message name="RegaloYavoyCCRequest">
+ 		<wsdl:part name="MSISDN" type="xsd:string"/>
+ 		<wsdl:part name="MSISDNDEST" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="RegaloYavoyCCResponse">
+ 		<wsdl:part name="res" type="xsd:int"/>
+	</wsdl:message>
+
+	<wsdl:portType name="SIPR_RBTPortType">
+	
+		<wsdl:operation name="AltaSuscriptorEmpresa">
+			<wsdl:documentation>Realiza el alta de un suscriptor de una empresa</wsdl:documentation>
+			<wsdl:input message="tns:AltaSuscriptorEmpresaRequest"/>
+			<wsdl:output message="tns:AltaSuscriptorEmpresaResponse"/>
+		</wsdl:operation>
+	
+		<wsdl:operation name="ConsultaSuscriptorEmpresa">
+			<wsdl:documentation>Realiza la consulta de un suscriptor de una empresa</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaSuscriptorEmpresaRequest"/>
+			<wsdl:output message="tns:ConsultaSuscriptorEmpresaResponse"/>
+		</wsdl:operation>
+	
+		<wsdl:operation name="ModificaSuscriptorEmpresa">
+			<wsdl:documentation>Realiza la modificacion de un suscriptor de una empresa</wsdl:documentation>
+			<wsdl:input message="tns:ModificaSuscriptorEmpresaRequest"/>
+			<wsdl:output message="tns:ModificaSuscriptorEmpresaResponse"/>
+		</wsdl:operation>
+	
+		<wsdl:operation name="BajaSuscriptorEmpresa">
+			<wsdl:documentation>Un suscriptor deja de pertenecer a una empresa</wsdl:documentation>
+			<wsdl:input message="tns:BajaSuscriptorEmpresaRequest"/>
+			<wsdl:output message="tns:BajaSuscriptorEmpresaResponse"/>
+		</wsdl:operation>
+	
+		<wsdl:operation name="ConfirmAlta">
+			<wsdl:documentation>Confirmacion de alta de un suscriptor por parte de sistemas.</wsdl:documentation>
+			<wsdl:input message="tns:ConfirmAltaRequest"/>
+			<wsdl:output message="tns:ConfirmAltaResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConfirmBaja">
+			<wsdl:documentation>Confirmacion de baja de un suscriptor por parte de sistemas.</wsdl:documentation>
+			<wsdl:input message="tns:ConfirmBajaRequest"/>
+			<wsdl:output message="tns:ConfirmBajaResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="CambioMSISDN">
+			<wsdl:documentation>Solicitud de cambio de MSISDN para un suscriptor.</wsdl:documentation>
+			<wsdl:input message="tns:CambioMSISDNRequest"/>
+			<wsdl:output message="tns:CambioMSISDNResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="BajaServicio">
+			<wsdl:documentation>Solicitud de baja en el servicio de un suscriptor</wsdl:documentation>
+			<wsdl:input message="tns:BajaServicioRequest"/>
+			<wsdl:output message="tns:BajaServicioResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConsultaEstado">
+			<wsdl:documentation>Solicitud de consulta de estado de un suscriptor.</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaEstadoRequest"/>
+			<wsdl:output message="tns:ConsultaEstadoResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="RespuestaAlta">
+			<wsdl:documentation>Confirmacion de alta de un suscriptor por parte de sistemas.</wsdl:documentation>
+			<wsdl:input message="tns:RespuestaAltaRequest"/>
+			<wsdl:output message="tns:RespuestaAltaResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="RespuestaBaja">
+			<wsdl:documentation>Confirmacion de baja de un suscriptor por parte de sistemas.</wsdl:documentation>
+			<wsdl:input message="tns:RespuestaBajaRequest"/>
+			<wsdl:output message="tns:RespuestaBajaResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="AltaRBTCC">
+			<wsdl:documentation>Solicitud de alta de un suscriptor desde Canal Cliente.</wsdl:documentation>
+			<wsdl:input message="tns:AltaRBTCCRequest"/>
+			<wsdl:output message="tns:AltaRBTCCResponse"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="BajaRBTCC">
+			<wsdl:documentation>Solicitud de baja de un suscriptor desde Canal Cliente.</wsdl:documentation>
+			<wsdl:input message="tns:BajaRBTCCRequest"/>
+			<wsdl:output message="tns:BajaRBTCCResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="CompraRBTCC">
+			<wsdl:documentation>Solicitud de compra de un suscriptor desde Canal Cliente.</wsdl:documentation>
+			<wsdl:input message="tns:CompraRBTCCRequest"/>
+			<wsdl:output message="tns:CompraRBTCCResponse"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="AltaRBTPubliCC">
+			<wsdl:documentation>Solicitud de alta en publicitario de un suscriptor desde Canal Cliente.</wsdl:documentation>
+			<wsdl:input message="tns:AltaRBTPubliCCRequest"/>
+			<wsdl:output message="tns:AltaRBTPubliCCResponse"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="BajaRBTPubliCC">
+			<wsdl:documentation>Solicitud de baja en publicitario de un suscriptor desde Canal Cliente.</wsdl:documentation>
+			<wsdl:input message="tns:BajaRBTPubliCCRequest"/>
+			<wsdl:output message="tns:BajaRBTPubliCCResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConsultaRBTPrecio">
+			<wsdl:documentation>Consulta del precio de una melodia para un suscriptor.</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaRBTPrecioRequest"/>
+			<wsdl:output message="tns:ConsultaRBTPrecioResponse"/>
+		</wsdl:operation>		
+
+		<wsdl:operation name="ConsultaRBTDefecto">
+			<wsdl:documentation>Consulta de la melodia por defecto de un suscriptor.</wsdl:documentation>
+			<wsdl:input message="tns:ConsultaRBTDefectoRequest"/>
+			<wsdl:output message="tns:ConsultaRBTDefectoResponse"/>
+		</wsdl:operation>
+				
+		<wsdl:operation name="RegaloYavoyCC">
+			<wsdl:documentation>Solicitud de regalo de un suscriptor a otro desde Canal Cliente.</wsdl:documentation>
+			<wsdl:input message="tns:RegaloYavoyCCRequest"/>
+			<wsdl:output message="tns:RegaloYavoyCCResponse"/>
+		</wsdl:operation>		
+				
+	</wsdl:portType>
+	
+	
+	
+	<wsdl:binding name="SIPR_RBTBinding" type="tns:SIPR_RBTPortType">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<wsdl:operation name="AltaSuscriptorEmpresa">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConsultaSuscriptorEmpresa">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ModificaSuscriptorEmpresa">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="BajaSuscriptorEmpresa">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConfirmAlta">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConfirmBaja">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="CambioMSISDN">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="BajaServicio">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="ConsultaEstado">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="RespuestaAlta">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="RespuestaBaja">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="AltaRBTCC">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="BajaRBTCC">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="CompraRBTCC">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+				
+		<wsdl:operation name="AltaRBTPubliCC">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="BajaRBTPubliCC">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+				
+		<wsdl:operation name="ConsultaRBTPrecio">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>				
+
+		<wsdl:operation name="ConsultaRBTDefecto">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>				
+				
+		<wsdl:operation name="RegaloYavoyCC">
+			<soap:operation/>
+			<wsdl:input>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:SIPR_RBT" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>				
+				
+	</wsdl:binding>
+	
+	
+	
+	
+	<wsdl:service name="SIPR_RBT">
+		<wsdl:documentation>gSOAP 2.3.8 generated service definition</wsdl:documentation>
+		<wsdl:port binding="tns:SIPR_RBTBinding" name="SIPR_RBT">
+			<soap:address location="http://localhost:8080/rbt/services/SIPR_RBT"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.Parameters" table="RBT_PARAMETERS" lazy="false">
+		<composite-id>
+			<key-property name="type" column="TYPE" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="param" column="PARAM" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+		</composite-id>
+
+		<property column="VALUE" length="500" name="value" type="java.lang.String" />
+		<property column="PARAM_INFO" length="500" name="info" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

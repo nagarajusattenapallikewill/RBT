@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>rbt</display-name>
+	
+	<!-- To support redirection RedirectionFilter needs to be enabled. -->
+	<filter>
+		<description>
+		Request Redirection Filter</description>
+		<display-name>RedirectionFilter</display-name>
+		<filter-name>RedirectionFilter</filter-name>
+		<filter-class>com.onmobile.apps.ringbacktones.webservice.api.RedirectionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/Rbt.do</url-pattern>
+	</filter-mapping>
+		<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/Selection.do</url-pattern>
+	</filter-mapping>
+		<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/Subscription.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/RBTDownloadFile.do</url-pattern>
+	</filter-mapping>	
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/ApplicationDetails.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/Utils.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/WebService.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/rbt_promotion.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/rbt_daemon.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RedirectionFilter</filter-name>
+		<url-pattern>/consentCallback.do</url-pattern>
+	</filter-mapping>
+	<filter>
+	
+		<description>
+		Character Encoding Filter</description>
+		<display-name>CharacterEncodingFilter</display-name>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>com.onmobile.apps.ringbacktones.webservice.api.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>com.onmobile.apps.ringbacktones.webservice.api.DBConnectionTraceRequestListener</listener-class>
+	</listener>
+
+	<filter>
+		<description>
+		Third Party Request Logger Filter</description>
+		<display-name>LoggerFilter</display-name>
+		<filter-name>LoggerFilter</filter-name>
+		<filter-class>com.onmobile.apps.ringbacktones.webservice.api.LoggerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/Rbt.do</url-pattern>
+	</filter-mapping>
+		<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/Group.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/Subscription.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/Selection.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/rbt_promotion.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/ApplicationDetails.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/Utils.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/WebService.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/RBTDownloadFile.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/SelectionPreConsentInt.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/Offer.do</url-pattern>
+	</filter-mapping>	
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/rbt_sms.jsp</url-pattern>
+	</filter-mapping>	
+	<filter-mapping>
+		<filter-name>LoggerFilter</filter-name>
+		<url-pattern>/rbt_daemon.jsp</url-pattern>
+	</filter-mapping>
+	<filter>
+		<description>
+		Duplicate Request Filter</description>
+		<display-name>DuplicateRequestFilter</display-name>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<filter-class>com.onmobile.apps.ringbacktones.webservice.api.DuplicateRequestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<url-pattern>/Selection.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<url-pattern>/Subscription.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<url-pattern>/Gift.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<url-pattern>/Copy.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<url-pattern>/BookMark.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>DuplicateRequestFilter</filter-name>
+		<url-pattern>/Group.do</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<description>
+		Third Party Request Logger Filter</description>
+		<display-name>ThirdPartyLoggerFilter</display-name>
+		<filter-name>ThirdPartyLoggerFilter</filter-name>
+		<filter-class>com.onmobile.apps.ringbacktones.webservice.api.ThirdPartyLoggerFilter</filter-class>
+	</filter>
+	<!--<filter-mapping>
+		<filter-name>ThirdPartyLoggerFilter</filter-name>
+		<url-pattern>/Selection.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ThirdPartyLoggerFilter</filter-name>
+		<url-pattern>/Subscription.do</url-pattern>
+	</filter-mapping>-->
+		
+	<servlet>
+		<description>
+			Start up servlet</description>
+		<display-name>StartUp</display-name>
+		<servlet-name>StartUp</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.StartUp</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>
+			RSS Feed Scheduler Uplaod</description>
+		<display-name>RSSFeedSchedulerUpload</display-name>
+		<servlet-name>RSSFeedSchedulerUpload</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.RSSFeedSchedulerUpload</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Start up servlet Response</description>
+		<display-name>RSSFeedSchedulerResponse</display-name>
+		<servlet-name>RSSFeedSchedulerResponse</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.RSSFeedSchedulerResponse</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Returns all Subscriber Information and Call Details</description>
+		<display-name>Rbt</display-name>
+		<servlet-name>Rbt</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Rbt</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the activation and deactivation request and returns the update
+			subscriber status</description>
+		<display-name>Subscription</display-name>
+		<servlet-name>Subscription</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.Subscription</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the activation and selection requests from IVR for
+			scratchcards</description>
+		<display-name>Scratchcard</display-name>
+		<servlet-name>ScratchCard</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.ScratchCard</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the activation and deactivation request and returns the update
+			subscriber status</description>
+		<display-name>AirtelTAC</display-name>
+		<servlet-name>AirtelTAC</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.provisioning.api.AirtelTAC</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>rest-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>rest-dispatcher</servlet-name>
+		<url-pattern>/v2/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description>
+			Provides Subscriber details in specified format to MKarbon</description>
+		<display-name>ReferralCheck</display-name>
+		<servlet-name>ReferralCheck</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.provisioning.api.ReferCheckSubscriber</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+			Provides an API through which the MKarbon system can subscribe a user </description>
+		<display-name>ReferralSubscribe</display-name>
+		<servlet-name>ReferralSubscribe</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.provisioning.api.ReferSubscribeUser</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+			Processes the adding and deleting selections and returns the update subscriber
+			library information</description>
+		<display-name>Selection</display-name>
+		<servlet-name>Selection</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.Selection</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Gets the offers to be presented by the user from SMClient and returns the same</description>
+		<display-name>Offer</display-name>
+		<servlet-name>Offer</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.Offer</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the book mark add, delete and overwrite requests and return the
+			update BookMark Details</description>
+		<display-name>BookMark</display-name>
+		<servlet-name>BookMark</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.BookMark</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Adding groups and group members</description>
+		<display-name>Group</display-name>
+		<servlet-name>Group</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Group</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the getting and setting copy requests</description>
+		<display-name>Copy</display-name>
+		<servlet-name>Copy</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Copy</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the gift request</description>
+		<display-name>Gift</display-name>
+		<servlet-name>Gift</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Gift</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the Search request</description>
+		<display-name>Search</display-name>
+		<servlet-name>Search</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Search</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+			Validates the number for gift and personalization</description>
+		<display-name>ValidateNumber</display-name>
+		<servlet-name>ValidateNumber</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.ValidateNumber</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Sets the subscriber specific details like language and age</description>
+		<display-name>SetSubscriberDetails</display-name>
+		<servlet-name>SetSubscriberDetails</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.SetSubscriberDetails</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes Get and Set Application Details requests</description>
+		<display-name>ApplicationDetails</display-name>
+		<servlet-name>ApplicationDetails</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.ApplicationDetails</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the Bulk Requests</description>
+		<display-name>Bulk</display-name>
+		<servlet-name>BulkTask</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.BulkTask</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Process TNB requests Online</description>
+		<display-name>TnbActivation</display-name>
+		<servlet-name>TnbActivation</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.TnbActivation</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes the Bulk Requests</description>
+		<display-name>BulkUpload</display-name>
+		<servlet-name>BulkUploadTask</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.BulkUploadTask</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Utility api</description>
+		<display-name>Utils</display-name>
+		<servlet-name>Utils</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Utils</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Handles all Data requests</description>
+		<display-name>Data</display-name>
+		<servlet-name>Data</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Data</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Returns the category and clip details</description>
+		<display-name>Content</display-name>
+		<servlet-name>Content</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.Content</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			serves third party web optin song selection requests</description>
+		<display-name>WebSongSelection</display-name>
+		<servlet-name>WebSongSelection</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.WebSongSelection</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			serves rdc song selection requests</description>
+		<display-name>RDCSongSelection</display-name>
+		<servlet-name>RDCSongSelection</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.RDCSongSelection</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Process USSD Requests</description>
+		<display-name>Ussd</display-name>
+		<servlet-name>Ussd</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.provisioning.api.Ussd</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Processes SNG user activation/deactivation</description>
+		<display-name>Sng</display-name>
+		<servlet-name>Sng</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.Sng</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Process Change MSISDN Requests</description>
+		<display-name>ChangeMsisdn</display-name>
+		<servlet-name>ChangeMsisdn</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.provisioning.api.ChangeMsisdn</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Process QRCode Requests</description>
+		<display-name>QRCode</display-name>
+		<servlet-name>QRCode</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.QRCode</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Process CrossOperator Song Selection Requests</description>
+		<display-name>ContentInterOperatorability</display-name>
+		<servlet-name>ContentInterOperatorability</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.subscriptions.ContentInterOperatorability</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Process WebService Requests</description>
+		<display-name>WebService</display-name>
+		<servlet-name>WebService</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.WebService</servlet-class>
+	</servlet>	
+	<servlet>
+		<description>Process WebService Requests</description>
+		<display-name>GetCharge</display-name>
+		<servlet-name>GetCharge</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.WebService</servlet-class>
+		<init-param>
+			<param-name>action</param-name>
+			<param-value>getCharge</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>Process Voda CT Requests</description>
+		<display-name>VodaCTservice</display-name>
+		<servlet-name>vodaCTService</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.provisioning.api.VodaCTservice</servlet-class>
+	</servlet>
+	<servlet>
+	 	                 <description>Process Selection PreConsent Requests</description>
+ 	                 <display-name>SelectionPreConsent</display-name>
+ 	                 <servlet-name>SelectionPreConsent</servlet-name>
+ 	                 <servlet-class>
+ 	                         com.onmobile.apps.ringbacktones.webservice.api.SelectionPreConsent</servlet-class>
+ 	                         </servlet>
+	                         <servlet>
+                  <description>Promotion PreConsent Requests</description>
+ 	                 <display-name>PromotionPreConsent</display-name>
+	                 <servlet-name>PromotionPreConsent</servlet-name>
+ 	                 <servlet-class>
+ 	                         com.onmobile.apps.ringbacktones.provisioning.api.PromotionPreConsent</servlet-class>
+                </servlet>
+
+<servlet>
+                 <description>Subscription PreConsent Requests</description>
+ 	                 <display-name>SubscriptionPreConsent</display-name>
+	                 <servlet-name>SubscriptionPreConsent</servlet-name>
+                 <servlet-class>
+                         com.onmobile.apps.ringbacktones.provisioning.api.SubscriptionPreConsent</servlet-class>
+         </servlet>
+	         <servlet>
+	                 <description>Consent Callback Requests</description>
+	                 <display-name>Consent</display-name>
+ 	                 <servlet-name>Consent</servlet-name>
+	                 <servlet-class>
+	                         com.onmobile.apps.ringbacktones.provisioning.api.Consent</servlet-class>
+ 	         </servlet>
+
+	<servlet>
+		<description>
+			Download file</description>
+		<display-name>RBTDownloadFile</display-name>
+		<servlet-name>RBTDownloadFile</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.RBTDownloadFile</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Consent Selection Integration</description>
+		<display-name>ConsentSelIntegration</display-name>
+		<servlet-name>ConsentSelIntegration</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SelectionConsentIntegration</servlet-class>
+	</servlet>
+	<!-- RBT-9213 -->
+	<servlet>
+		<description>SDP Direct Consent</description>
+		<display-name>SDPDirectConsent</display-name>
+		<servlet-name>SDPDirectConsent</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SDPDirectConsent</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SDPDirectConsent</servlet-name>
+		<url-pattern>/SdpDirect.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet-mapping>
+		<servlet-name>ConsentSelIntegration</servlet-name>
+		<url-pattern>/SelectionPreConsentInt.do</url-pattern>
+	</servlet-mapping>
+
+    <servlet-mapping>
+		<servlet-name>RSSFeedSchedulerUpload</servlet-name>
+		<url-pattern>/rssFeedUpload.do</url-pattern>
+	</servlet-mapping>
+    <servlet-mapping>
+		<servlet-name>RSSFeedSchedulerResponse</servlet-name>
+		<url-pattern>/rssFeedResponse.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>StartUp</servlet-name>
+		<url-pattern>/StartUp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Rbt</servlet-name>
+		<url-pattern>/Rbt.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Subscription</servlet-name>
+		<url-pattern>/Subscription.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ScratchCard</servlet-name>
+		<url-pattern>/Scratchcard.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Selection</servlet-name>
+		<url-pattern>/Selection.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BookMark</servlet-name>
+		<url-pattern>/BookMark.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Group</servlet-name>
+		<url-pattern>/Group.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Copy</servlet-name>
+		<url-pattern>/Copy.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Gift</servlet-name>
+		<url-pattern>/Gift.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ValidateNumber</servlet-name>
+		<url-pattern>/ValidateNumber.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SetSubscriberDetails</servlet-name>
+		<url-pattern>/SetSubscriberDetails.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ApplicationDetails</servlet-name>
+		<url-pattern>/ApplicationDetails.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BulkTask</servlet-name>
+		<url-pattern>/BulkTask.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BulkUploadTask</servlet-name>
+		<url-pattern>/BulkUploadTask.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Utils</servlet-name>
+		<url-pattern>/Utils.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Data</servlet-name>
+		<url-pattern>/Data.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Content</servlet-name>
+		<url-pattern>/Content.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Search</servlet-name>
+		<url-pattern>/Search.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>WebSongSelection</servlet-name>
+		<url-pattern>/rbt_webselection.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RDCSongSelection</servlet-name>
+		<url-pattern>/rbt_rdc_song_selection.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TnbActivation</servlet-name>
+		<url-pattern>/TnbActivation.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Offer</servlet-name>
+		<url-pattern>/Offer.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Ussd</servlet-name>
+		<url-pattern>/Ussd.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Sng</servlet-name>
+		<url-pattern>/Sng.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangeMsisdn</servlet-name>
+		<url-pattern>/ChangeMsisdn.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QRCode</servlet-name>
+		<url-pattern>/QRCode.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ContentInterOperatorability</servlet-name>
+		<url-pattern>/ContentInterOperatorability.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>WebService</servlet-name>
+		<url-pattern>/WebService.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetCharge</servlet-name>
+		<url-pattern>/GetCharge.do</url-pattern>
+	</servlet-mapping>
+	 <servlet-mapping>
+ 	                 <servlet-name>SelectionPreConsent</servlet-name>
+ 	                 <url-pattern>/SelectionPreConsent.do</url-pattern>
+	         </servlet-mapping>
+			  <servlet-mapping>
+	                 <servlet-name>SubscriptionPreConsent</servlet-name>
+	                 <url-pattern>/SubscriptionPreConsent.do</url-pattern>
+ 	         </servlet-mapping>
+ 	         <servlet-mapping>
+	 	                 <servlet-name>Consent</servlet-name>
+	 	                 <url-pattern>/Consent.do</url-pattern>
+ 	         </servlet-mapping>
+	         <servlet-mapping>
+	                 <servlet-name>PromotionPreConsent</servlet-name>
+	                 <url-pattern>/PromotionPreConsent.do</url-pattern>
+ 	         </servlet-mapping>
+	<servlet>
+		<description>
+			process copy records and make entry in viralsms table</description>
+		<servlet-name>rbt_copy</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Copy</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			process OBD Request</description>
+		<servlet-name>rbt_obd</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.OBD</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used for transfer of cross operator copy records to the correct
+			circle/rdc Entry is made in the viral sms table</description>
+		<servlet-name>rbt_crosscopy</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.CrossCopy</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Transfers the viral sms table content for cross copy with the final clip id
+			from rdc to the respective site</description>
+		<servlet-name>rbt_crosscopyrdc</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.CrossCopyRdc</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Added to support cross operator copy for mnp</description>
+		<servlet-name>rbt_rdc_copy_transfer</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.daemons.interoperator.servlet.InterCopyTransferToRDC</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Transfers the viral sms table content for cross copy with the final clip id
+			from rdc to the respective site</description>
+		<servlet-name>rbt_mnp_callback</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.daemons.interoperator.servlet.InterOperatorOperatorIdCallback</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Callback url for MNP to hit to update RBT_THIRD_PARTY_REQUESTS_TABLE</description>
+		<servlet-name>rbt_content_request_mnp_callback</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.daemons.contentinteroperator.servlet.ContentInterOperatorOperatorIDCallBack</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used to add a user generated clips into the database, through file upload</description>
+		<servlet-name>rbt_ugc</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.UGC</servlet-class>
+	</servlet>
+	 <servlet>
+        <description>
+        Used to add a user generated clips into the database, through file upload</description> 
+		<servlet-name>rbt_ugc_add</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.UGC</servlet-class>
+	</servlet>
+	 <servlet>
+        <description>
+        Used to expire a user generated clips into the database</description> 
+		<servlet-name>rbt_ugc_expire</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.UGC</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Returns the value of the subscriber wave file for the given combination of
+			subscriber id, caller id</description>
+		<servlet-name>rbt_tonecopy</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ToneCopy</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used to insert records into the viral sms table for various processes
+			like copy/poll and also to update access count</description>
+		<servlet-name>rbt_playerhelper</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.RbtPlayerHelper</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used to hit third party url</description>
+		<servlet-name>esia_quiz_forwarder</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ESIAQuizForwarder</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used to process direct activation request from SubMgr</description>
+		<servlet-name>daemon</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Daemon</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			returns whether the subscriber is active or not.</description>
+		<servlet-name>rbt_substatus</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SubscriberStatus</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			returns whether the subscriber is active or not.</description>
+		<servlet-name>rbt_substatus_tatagsm</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SubscriberStatus</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Return values to determine the current status of the subscriber.</description>
+		<servlet-name>rbt_subprofile</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SubscriberProfile</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Transfers the viral sms table content for cross gifting</description>
+		<servlet-name>rbt_crossgift</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.CrossGift</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Handle SMS provisioning</description>
+		<servlet-name>rbt_sms</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Sms</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Process gift records and make entry in viralsms table</description>
+		<servlet-name>rbt_gift</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Gift</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used to send SMS ,depending on whether the user has accepted or rejected
+			the gift, to the giftee</description>
+		<servlet-name>rbt_giftack</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.GiftAcknowledge</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			Used to transfer the sms from one site to another. If needed sms mapping
+			is also done before passing it on</description>
+		<servlet-name>rbt_redirect</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Redirect</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process Ad RBT requests</description>
+		<servlet-name>rbt_ad_rbt2</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.AdRBT</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process BSNL Ad RBT requests</description>
+		<servlet-name>provlistener</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.AdRBT</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process promotion requests</description>
+		<servlet-name>rbt_promotion</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Promotion</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process hsb requests</description>
+		<servlet-name>rbt_hsb</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.Hsb</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+			process promotion requests</description>
+		<servlet-name>rbt_song_set</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SongSet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process airtel ussd requests</description>
+		<servlet-name>ussd</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>USSD</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel envio requests</description>
+		<servlet-name>envio</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>ENVIO</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel autodial requests</description>
+		<servlet-name>autodial</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>AUTODIAL</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel EC requests</description>
+		<servlet-name>easycharge</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>EC</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel UGC requests</description>
+		<servlet-name>UGCContentUpload</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.UGCContentUpload</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>UGCUPLOAD</param-value>
+		</init-param>
+	</servlet>
+
+		<servlet>
+		<description>process UGC requests for customers other than Airtel</description>
+		<servlet-name>UGCContentUploadOthers</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.UGCContentUploadOthers</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>UGCUPLOADOTHERS</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<description>process airtel MOD requests</description>
+		<servlet-name>mod</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>MOD</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<description>process Uninor third party requests</description>
+		<servlet-name>OMUninor</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process Aircel third party requests</description>
+		<servlet-name>OMAircel</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>process airtel MOD requests</description>
+		<servlet-name>rbt_content_validator</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ContentValidator</servlet-class>
+	</servlet>
+	<!-- monitoring API-->
+	<servlet>
+		<description>starts the monitoring</description>
+		<servlet-name>rbt_monitor</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.monitor.api.Monitor</servlet-class>
+	</servlet>
+	<servlet>
+		<description>ends the monitoring and is called internally by one of the applications</description>
+		<servlet-name>rbt_end_monitor</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.monitor.api.EndMonitor</servlet-class>
+	</servlet>
+	<servlet>
+		<description>For Optin confirmation through USSD</description>
+		<servlet-name>CopyConfirm</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.CopyConfirm</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process retailer selection requests</description>
+		<servlet-name>Retailer</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.WebService</servlet-class>
+		<init-param>
+			<param-name>action</param-name>
+			<param-value>retailerSelection</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>rbt_monitor</servlet-name>
+		<url-pattern>/rbt_monitor.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CopyConfirm</servlet-name>
+		<url-pattern>/rbt_confirm.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_end_monitor</servlet-name>
+		<url-pattern>/rbt_end_monitor.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_content_validator</servlet-name>
+		<url-pattern>/rbt_content_validator.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_song_set</servlet-name>
+		<url-pattern>/rbt_song_set.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_copy</servlet-name>
+		<url-pattern>/rbt_copy.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AirtelTAC</servlet-name>
+		<url-pattern>/Redirector.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ReferralCheck</servlet-name>
+		<url-pattern>/ReferralCheck.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ReferralSubscribe</servlet-name>
+		<url-pattern>/ReferralSubscribe.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_obd</servlet-name>
+		<url-pattern>/rbt_obd.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_crosscopy</servlet-name>
+		<url-pattern>/rbt_cross_copy.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_crosscopyrdc</servlet-name>
+		<url-pattern>/rbt_cross_copy_rdc.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_rdc_copy_transfer</servlet-name>
+		<url-pattern>/rbt_rdc_copy_transfer.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_mnp_callback</servlet-name>
+		<url-pattern>/rbt_mnp_callback.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_content_request_mnp_callback</servlet-name>
+		<url-pattern>/rbt_content_request_mnp_callback.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_ugc</servlet-name>
+		<url-pattern>/rbt_ugc.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_ugc_add</servlet-name>
+		<url-pattern>/rbt_ugc_add.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_ugc_expire</servlet-name>
+		<url-pattern>/rbt_ugc_expire.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_tonecopy</servlet-name>
+		<url-pattern>/rbt_tonecopy.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_playerhelper</servlet-name>
+		<url-pattern>/rbt_player_updater.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>esia_quiz_forwarder</servlet-name>
+		<url-pattern>/esia_quiz_forwarder.jsp</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>daemon</servlet-name>
+		<url-pattern>/daemon</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_crossgift</servlet-name>
+		<url-pattern>/rbt_cross_gift.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_substatus</servlet-name>
+		<url-pattern>/rbt_status.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_substatus_tatagsm</servlet-name>
+		<url-pattern>/GET_HISTORY</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_subprofile</servlet-name>
+		<url-pattern>/rbt_subscriberprofile.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_sms</servlet-name>
+		<url-pattern>/rbt_sms.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_gift</servlet-name>
+		<url-pattern>/rbt_gift.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_giftack</servlet-name>
+		<url-pattern>/rbt_gift_acknowledge.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_redirect</servlet-name>
+		<url-pattern>/rbt_redirect.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_ad_rbt2</servlet-name>
+		<url-pattern>/rbt_ad_rbt2.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>provlistener</servlet-name>
+		<url-pattern>/provlistener</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_promotion</servlet-name>
+		<url-pattern>/rbt_promotion.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>rbt_hsb</servlet-name>
+		<url-pattern>/rbt_hsb.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ussd</servlet-name>
+		<url-pattern>/ussd.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>envio</servlet-name>
+		<url-pattern>/envio.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>autodial</servlet-name>
+		<url-pattern>/autodial.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>easycharge</servlet-name>
+		<url-pattern>/easycharge.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>mod</servlet-name>
+		<url-pattern>/mod.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OMUninor</servlet-name>
+		<url-pattern>/OMUninor.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OMAircel</servlet-name>
+		<url-pattern>/OMAircel.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UGCContentUpload</servlet-name>
+		<url-pattern>/metaDataInsert.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UGCContentUploadOthers</servlet-name>
+		<url-pattern>/ugcDataInsert.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Retailer</servlet-name>
+		<url-pattern>/Retailer.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>Apache-Axis Servlet</display-name>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+	</servlet>
+	<servlet>
+	       <display-name>Apache-Axis Servlet</display-name>
+ 	       <servlet-name>consentCallback</servlet-name>
+	    <servlet-class>com.onmobile.apps.ringbacktones.daemons.doubleConfirmation.servlet.DoubleConfirmationCallbackServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+	       <display-name>Apache-Axis Servlet</display-name>
+ 	       <servlet-name>htConsentCallback</servlet-name>
+	    <servlet-class>com.onmobile.apps.ringbacktones.daemons.doubleConfirmation.servlet.HTConsentReturnServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/servlet/AxisServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>*.jws</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>Axis Admin Servlet</display-name>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/servlet/AdminServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>vodaCTService</servlet-name>
+		<url-pattern>/vodaCTService.do</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>consentCallback</servlet-name>
+     <url-pattern>/consentCallback.do</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet-mapping>
+    <servlet-name>htConsentCallback</servlet-name>
+     <url-pattern>/htconsentreturn.do</url-pattern>
+ </servlet-mapping>
+
+	<!-- SATRBTServlet-->
+	<servlet>
+		<description>SAT RBT servlet for Argentina</description>
+		<display-name>SATRbtArg</display-name>
+		<servlet-name>SATRbtArg</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.SATRbtArg</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SATRbtArg</servlet-name>
+		<url-pattern>/SATRbtArg.do</url-pattern>
+	</servlet-mapping>
+	<!-- GRBTServlet-->
+	<servlet>
+		<description>GRBT servlet for UploadingData</description>
+		<display-name>GrbtDataUpload</display-name>
+		<servlet-name>GrbtDataUpload</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.GrbtDataUpload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GrbtDataUpload</servlet-name>
+		<url-pattern>/GrbtDataUpload.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>RBTDownloadFile</servlet-name>
+		<url-pattern>/RBTDownloadFile.do</url-pattern>
+	</servlet-mapping>
+
+	<!--Configure Affiliate GROUP servlet-->
+	<servlet>
+		<description>Process Affiliate Group Request</description>
+		<display-name>AffiliateGroup</display-name>
+		<servlet-name>AffiliateGroup</servlet-name>
+		<servlet-class>
+			com.onmobile.apps.ringbacktones.webservice.api.AffiliateGroup</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AffiliateGroup</servlet-name>
+		<url-pattern>/AffiliateGroup.do</url-pattern>
+	</servlet-mapping>
+	
+  <!--Configure CopyConsent servlet-->
+  
+	<servlet>
+		<description>Process CopyConsent Request</description>
+		<display-name>CopyConsent</display-name>
+		<servlet-name>CopyConsent</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.actions.CopyConsent</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CopyConsent</servlet-name>
+		<url-pattern>/CopyConsent.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>Apache-Axis Servlet</display-name>
+		<servlet-name>htGiftNotification</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.HtGiftNotification</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>htGiftNotification</servlet-name>
+		<url-pattern>/htGiftNotification.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>GCM Push Notification</description>
+		<display-name>GCM PushNotification</display-name>
+		<servlet-name>GCMPushNotification</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.actions.SendMobileAppNotification</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GCMPushNotification</servlet-name>
+		<url-pattern>/SendMobileAppNotification.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>SAT Push Notification</description>
+		<display-name>SAT Push Notification</display-name>
+		<servlet-name>SATPushNotification</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.SatPushNotification</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SATPushNotification</servlet-name>
+		<url-pattern>/satpushnotification/send/retry</url-pattern>
+	</servlet-mapping>
+	
+	<!-- RBT-16797 -->
+	<servlet>
+		<description>ConsentDetails Details</description>
+		<display-name>ConsentDetails</display-name>
+		<servlet-name>ConsentDetails</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.webservice.api.ConsentDetails</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConsentDetails</servlet-name>
+		<url-pattern>/rbt_song_code_for_consent.do</url-pattern>
+	</servlet-mapping>
+	
+	<error-page>
+	    <error-code>404</error-code>
+		<location>/common-error.jsp</location> 
+	</error-page>
+	<error-page>
+	    <exception-type>java.lang.Throwable</exception-type>
+		<location>/common-error.jsp</location> 
+	</error-page>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

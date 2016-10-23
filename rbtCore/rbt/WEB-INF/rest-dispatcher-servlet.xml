@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.v2.controller" />
+	<!--<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.db.impl" />-->
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.processor" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.webservice.service" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.common" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.converter" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.service.impl" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.rbt2.command" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.v2.service" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.v2.resolver.request.handler" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.v2.resolver.request.impl" />
+	<context:component-scan base-package="com.onmobile.apps.ringbacktones.v2.util" />
+	
+	<mvc:default-servlet-handler />
+	<import resource="classpath:errorConfig.xml"/>
+	<import resource="classpath:featureListRestriction.xml"/>
+	<import resource="classpath:bean_spring.xml"/>
+	
+	<import resource="classpath:channels_inline.xml"/>
+	<import resource="classpath:beans_inline.xml"/>
+	<import resource="classpath:activators_inline.xml"/>
+	
+	<mvc:annotation-driven
+		content-negotiation-manager="contentNegotiationManager" >
+		<mvc:message-converters>
+			<bean class="com.onmobile.apps.ringbacktones.v2.converter.GsonHttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean id="offerMemcache"
+		class="com.onmobile.apps.ringbacktones.v2.util.OfferMemcache" init-method="initMemCache">
+		<property name="memcacheServerList" value="localhost:11211"/>
+		<property name="expiryInSeconds" value="5"/>
+		<property name="minConn" value="10"/>
+		<property name="maxConn" value="20"/>
+		<property name="poolName" value="subscriptionmemcache"/>
+		
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="268435456"/> 
+	</bean>
+  
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+				<value>config</value>
+			</list>
+		</property>
+	</bean>
+  
+	<bean id="buildAssetFactory" class="com.onmobile.apps.ringbacktones.v2.factory.BuildAssetFactory">
+		<property name="assetTypeAdapter" ref="assetTypeAdapter"/>
+	</bean>
+ 
+	<bean id="assetTypeAdapter" class="com.onmobile.apps.ringbacktones.v2.service.AssetTypeAdapter">
+		<property name="assetMap">
+			<map>
+				<entry key="7">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">SONG</value>
+				</entry>
+				<entry key="5">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">SONG</value>
+				</entry>
+				<entry key="16">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">RBTSTATION</value>
+				</entry>
+				<entry key="33">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">RBTPLAYLIST</value>
+				</entry>
+				<entry key="-1">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">SHUFFLELIST</value>
+				</entry>
+				<entry key="0">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">RBTPLAYLIST</value>
+				</entry>
+				<entry key="4">
+					<value type="com.livewiremobile.store.storefront.dto.rbt.Asset.AssetType">RBTUGC</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="true" />
+		<property name="parameterName" value="responseType" />
+		<property name="defaultContentType" value="application/json" />
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorParameter" value="true" />
+		<property name="useJaf" value="false" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json"></entry>
+				<entry key="xml" value="application/xml"></entry>
+			</map>
+		</property>
+	</bean>
+
+
+
+	<bean id="viewresolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="udpRBTServiceImpl" class="com.onmobile.apps.ringbacktones.v2.service.UDPRBTContentServiceImpl">
+	    <property name="errorCodeMapping" ref="responseErrorCodeMapping" />
+	    <property name="commonValidation" ref="commonValidation" />	
+		<property name="isSupportDirectActDct" ref="supportDirectACTDCT"/>
+		<property name="allowedContentType">
+			<set>
+				<value>SONG</value>
+				<value>RBTUGC</value>
+			</set>
+		 </property>
+	</bean>
+
+	<bean id="udpVoltronServiceImpl" class="com.onmobile.apps.ringbacktones.v2.service.UDPVoltronServiceImpl">
+		 <property name="errorCodeMapping" ref="responseErrorCodeMapping" />
+		 <property name="updService" ref="udpRBTServiceImpl" />
+	</bean>
+
+
+	<bean id="groupMemberRBTServiceImpl" class="com.onmobile.apps.ringbacktones.rbt2.service.impl.GroupMemberRBTServiceImpl">
+	    <property name="errorCodeMapping" ref="responseErrorCodeMapping" />
+	</bean>
+	<bean id="groupMemberVoltronServiceImpl" class="com.onmobile.apps.ringbacktones.rbt2.service.impl.GroupMemberVoltronServiceImpl">
+		 <property name="errorCodeMapping" ref="responseErrorCodeMapping" />
+		 <property name="groupMemberService" ref="groupMemberRBTServiceImpl" />
+	</bean>
+	
+	
+	
+	
+	
+	
+	<bean id="operatorUserDetailImpl" class="com.onmobile.apps.ringbacktones.rbt2.service.impl.OperatorUserDetailsServiceImpl" scope="singleton">
+		<property name="errorCodeMapping" ref="responseErrorCodeMapping" />
+	</bean>
+	
+	
+	<bean id="commonValidation" class="com.onmobile.apps.ringbacktones.v2.common.CommonValidation"/>
+
+	<bean id="serviceResolver" class="com.onmobile.apps.ringbacktones.v2.bean.ServiceResolver">
+		<property name="serviceImpl">
+			<map>
+				<entry key="udp_rbt" value-ref="udpRBTServiceImpl" />
+				<entry key="udp_voltron" value-ref="udpVoltronServiceImpl" />
+				<entry key="group_member_rbt" value-ref="groupMemberRBTServiceImpl" />
+				<entry key="group_member_voltron" value-ref="groupMemberVoltronServiceImpl" />
+				<entry key="call_Log_History_rbt" value-ref="callLogHistoryRBTServiceImpl" />
+				<entry key="call_Log_History_voltron" value-ref="callLogHistoryVoltronServiceImpl" />
+				<entry key="userDetails" value-ref="operatorUserDetailImpl" />
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="callLogHistoryRBTServiceImpl" class="com.onmobile.apps.ringbacktones.callLogImpl.CallLogHistoryImpl">
+	</bean>
+	<bean id="callLogHistoryVoltronServiceImpl" class="com.onmobile.apps.ringbacktones.v2.service.CallLogVoltronImpl">
+		<property name="errorCodeMapping" ref="responseErrorCodeMapping" />
+	</bean>
+	
+	
+</beans>

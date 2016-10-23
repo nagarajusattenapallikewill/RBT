@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/antlr-2.7.2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-chain-1.2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-validator-1.3.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/gson-1.7.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jspsmart.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/struts-taglib-1.3.10.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/struts-tiles-1.3.10.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/struts.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mobileCore"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

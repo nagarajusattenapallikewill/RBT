@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.CosDetails" table="RBT_COS_DETAIL">
+		<composite-id>
+			<key-property name="cosId" column="COS_ID" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="circleId" column="CIRCLE_ID" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="prepaidYes" column="PREPAID_YES" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="accessMode" column="ACCESS_MODE" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+		</composite-id>
+
+		<property column="SUBSCRIPTION_CLASS" length="50" name="subscriptionClass" type="java.lang.String" />
+		<property column="START_DATE" name="startDate" type="java.sql.Timestamp" />
+		<property column="END_DATE" name="endDate" type="java.sql.Timestamp" />
+		<property column="FREE_CHARGE_CLASS" length="200" name="freechargeClass" type="java.lang.String" />
+		<property column="VALID_DAYS" length="11" name="validDays" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="FREE_SONGS" length="11" name="freeSongs" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="FREE_MUSICBOXES" length="11" name="freeMusicboxes" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="RENEWAL_ALLOWED" length="11" name="renewalAllowed" type="java.lang.String" />
+		<property column="ACCEPT_RENEWAL" length="1" name="acceptRenewal" type="java.lang.String" />
+		<property column="CATEGORY_ID" length="11" name="categoryId" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="RENEWAL_COS_ID" length="10" name="renewalCosid" type="java.lang.String" />
+		<property column="ACTIVATION_PROMPT" length="100" name="activationPrompt" type="java.lang.String" />
+		<property column="SELECTION_PROMPT" length="100" name="selectionPrompt" type="java.lang.String" />
+		<property column="SMS_PROMO_CLIPS" length="100" name="smspromoClips" type="java.lang.String" />
+		<property column="NUM_SUBSCRIPTIONS_ALLOWED" length="11" name="numsubscriptionAllowed" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="IS_DEFAULT" length="1" name="isDefault" type="java.lang.String" />
+		<property column="SMS_KEYWORD" length="10" name="smsKeyword" type="java.lang.String" />
+		<property column="OPERATOR" length="50" name="operator" type="java.lang.String" />
+		<property column="COS_TYPE" length="20" name="cosType" type="java.lang.String" />
+		<property column="CONTENT_TYPES" length="100" name="contentTypes" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

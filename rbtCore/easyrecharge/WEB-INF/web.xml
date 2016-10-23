@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>rbt</display-name>
+	
+	<filter>
+	
+		<description>
+		Character Encoding Filter</description>
+		<display-name>CharacterEncodingFilter</display-name>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>com.onmobile.apps.ringbacktones.webservice.api.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>com.onmobile.apps.ringbacktones.webservice.api.DBConnectionTraceRequestListener</listener-class>
+	</listener>
+
+	
+	<servlet>
+		<description>process airtel ussd requests</description>
+		<servlet-name>ussd</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>USSD</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel envio requests</description>
+		<servlet-name>envio</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>ENVIO</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel autodial requests</description>
+		<servlet-name>autodial</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>AUTODIAL</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel EC requests</description>
+		<servlet-name>easycharge</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>EC</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<description>process airtel MOD requests</description>
+		<servlet-name>mod</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+		<init-param>
+			<param-name>RBT_REQUEST</param-name>
+			<param-value>MOD</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<description>process Uninor third party requests</description>
+		<servlet-name>OMUninor</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+	</servlet>
+	<servlet>
+		<description>process Aircel third party requests</description>
+		<servlet-name>OMAircel</servlet-name>
+		<servlet-class>com.onmobile.apps.ringbacktones.provisioning.api.ThirdParty</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ussd</servlet-name>
+		<url-pattern>/ussd.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>envio</servlet-name>
+		<url-pattern>/envio.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>autodial</servlet-name>
+		<url-pattern>/autodial.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>easycharge</servlet-name>
+		<url-pattern>/easycharge.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>mod</servlet-name>
+		<url-pattern>/mod.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OMUninor</servlet-name>
+		<url-pattern>/OMUninor.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OMAircel</servlet-name>
+		<url-pattern>/OMAircel.do</url-pattern>
+	</servlet-mapping>	
+	<error-page>
+	    <error-code>404</error-code>
+		<location>/common-error.jsp</location> 
+	</error-page>
+	<error-page>
+	    <exception-type>java.lang.Throwable</exception-type>
+		<location>/common-error.jsp</location> 
+	</error-page>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

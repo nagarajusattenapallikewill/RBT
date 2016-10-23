@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.bean.RbtViralSms" table="RBT_VIRAL_SMS_TABLE">
+		
+		<id name="smsId" type="long" column="SMS_ID" />
+			<generator class="increment"/>
+		</id>
+       	<property column="SUBSCRIBER_ID" name="subscriberId" type="string" />
+		<property column="SMS_SENT_TIME" name="sentTime" type="timestamp" />
+		<property column="SMS_TYPE" name="smsType" type="string" />
+		<property column="CALLER_ID" name="callerId" type="string" />
+		<property column="CLIP_ID" name="clipId" type="string" />
+		<property column="SEARCH_COUNT" name="searchCount" type="integer" />
+		<property column="SELECTED_BY" name="selectedBy" type="string" />
+		<property column="SET_TIME" name="setTime" type="timestamp" />
+		<property column="EXTRA_INFO" name="extraInfo" type="string" />
+		<property column="CIRCLE_ID" name="circleId" type="string" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/mobileCore.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/gson-1.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/java_memcached-release_2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-api-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/updatedCgEncryptionJars.jar"/>
+	<classpathentry kind="lib" path="lib/wcg-aes-encryption-0.0.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/RBTDEVELOPER/rbt/storeFronts/webcore2.0/build/webcore2.0.jar"/>
+	<classpathentry kind="output" path="build/WEB-INF/classes"/>
+</classpath>

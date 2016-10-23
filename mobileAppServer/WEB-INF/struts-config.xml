@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!--  <!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd"> -->
+
+
+
+
+<struts-config>
+
+
+
+<!-- ========================================= Global Exception Definitions -->
+
+    <global-exceptions>
+    <exception
+           key="error.global.mesage"
+	         type="java.lang.Exception"
+	         path="/jsp/errorPage.jsp" />
+        <!-- sample exception handler
+        <exception
+            key="expired.password"
+            type="app.ExpiredPasswordException"
+            path="/changePassword.jsp"/>
+        end sample -->
+    </global-exceptions>
+
+
+<!-- =========================================== Global Forward Definitions -->
+
+  <global-forwards>
+        <!-- Default forward to streamData.jsp for every action -->
+
+        <forward name="success" path="/jsp/streamData.jsp" />
+        
+    </global-forwards>
+    
+
+<!-- =========================================== Action Mapping Definitions -->
+
+    <action-mappings>
+            <!-- Default "Welcome" action -->
+            <!-- Forwards to Welcome.jsp -->
+          <action
+            path="/mainCategories"
+            type="com.onmobile.mobileapps.actions.MainCategoryAction"
+            parameter="method"
+            scope="request"
+        />
+        <action
+            path="/categories"
+            type="com.onmobile.mobileapps.actions.HomeAction"
+            scope="request"
+        />
+		<action
+            path="/subcategories"
+            type="com.onmobile.mobileapps.actions.SubCategoryAction"
+            parameter="method"
+            scope="request"
+        />
+        <action path="/clipinfo"
+        		type="com.onmobile.mobileapps.actions.ClipAction"
+        		scope="request"
+        		/>
+       <action path="/clipdetails"
+        		type="com.onmobile.mobileapps.actions.ClipDetailsAction"
+        		scope="request"
+        		/>
+		 <action path="/newRelease"
+        		type="com.onmobile.mobileapps.actions.NewReleaseAction"
+        		scope="request"
+        		/>
+
+		 <action path="/topSong"
+        		type="com.onmobile.mobileapps.actions.TopSongAction"
+        		scope="request"
+        		/>
+
+		 <action path="/bookmark"
+        		type="com.onmobile.mobileapps.actions.BookmarkAction"
+        		parameter="method"
+        		scope="request"
+        		/>
+          <action path="/download"
+        		type="com.onmobile.mobileapps.actions.DownloadAction"
+        		parameter="method"
+        		scope="request"
+        		/>
+		  <action path="/search"
+        		type="com.onmobile.mobileapps.actions.SearchAction"
+        		scope="request"
+        		/>
+
+		  <action path="/subscriber"
+        		type="com.onmobile.mobileapps.actions.SubscriberAction"
+        		parameter="method"
+        		scope="request"
+        		/>
+			<action path="/activate"
+        		type="com.onmobile.mobileapps.actions.ActivateAction"
+        		scope="request"
+        		/>
+
+          <action path="/averagerating"
+        		type="com.onmobile.mobileapps.actions.AverageRatingAction"
+        		scope="request"
+        		/>
+         <action path="/averageratingall"
+        		type="com.onmobile.mobileapps.actions.AverageRatingForAll"
+        		scope="request"
+        		/>
+			<action path="/deactivate"
+        		type="com.onmobile.mobileapps.actions.DeactivateAction"
+        		scope="request"
+        		/>
+			<action path="/register"
+        		type="com.onmobile.mobileapps.actions.RegisterAction"
+        		scope="request"
+        		/>
+			<action path="/registerid"
+        		type="com.onmobile.mobileapps.actions.RegisterIdAction"
+        		parameter="method"
+        		scope="request"
+        		/>
+			<action path="/dislike"
+        		type="com.onmobile.mobileapps.actions.DislikeAction"
+        		scope="request"
+        		/>
+            <action path="/gift"
+        		type="com.onmobile.mobileapps.actions.GiftAction"
+        		parameter="method"
+        		scope="request"
+        		/>
+			<action path="/like"
+        		type="com.onmobile.mobileapps.actions.LikeAction"
+        		scope="request"
+        		/>
+
+			<action path="/homeCategory"
+        		type="com.onmobile.mobileapps.actions.HomeCategoryAction"
+        		scope="request"
+        		/>
+			
+			<action path="/homeClip"
+        		type="com.onmobile.mobileapps.actions.HomeClipAction"
+        		scope="request"
+        		/>
+
+            <action path="/userrating"
+        		type="com.onmobile.mobileapps.actions.UserRatingAction"
+        		scope="request"
+        		/>
+
+             <action path="/selection"
+        		type="com.onmobile.mobileapps.actions.SelectionAction"
+        		parameter="method"
+        		scope="request"
+        		/>
+             
+             <action path="/checkdownload"
+        		type="com.onmobile.mobileapps.actions.CheckDownloadAction"
+        		scope="request"
+        		/>
+             
+             <action path="/checkbookmark"
+        		type="com.onmobile.mobileapps.actions.CheckBookmarkAction"
+        		scope="request"
+        		/>
+        		
+        	<action path="/promotionalclips"
+        		type="com.onmobile.mobileapps.actions.PromotionalClipsAction"
+        		scope="request"
+        		/>
+			
+			<action path="/group"
+        		type="com.onmobile.mobileapps.actions.GroupAction"
+				parameter="method"
+        		scope="request"
+        		/>
+
+			<action path="/copy"
+        		type="com.onmobile.mobileapps.actions.CopyAction"
+				parameter="method"
+        		scope="request"
+        		/>
+			<action path="/profileCategoriesAction"
+        		type="com.onmobile.mobileapps.actions.ProfileCategoriesAction"
+        		scope="request"
+        		/>
+			<action path="/parameter"
+        		type="com.onmobile.mobileapps.actions.ParameterAction"
+        		scope="request"
+        		/>
+       		<action path="/notification"
+	       		type="com.onmobile.mobileapps.actions.NotificationAction"
+	       		parameter="method"
+	       		scope="request"
+       		/>
+       		<action path="/offer"
+	       		type="com.onmobile.mobileapps.actions.OfferAction"
+	       		parameter="method"
+	       		scope="request"
+       		/>
+       		<action path="/paramForType"
+	       		type="com.onmobile.mobileapps.actions.ParamForTypeAction"
+	       		parameter="method"
+	       		scope="request"
+       		/>
+       		<action path="/feedback"
+	       		type="com.onmobile.mobileapps.actions.FeedbackAction"
+	       		parameter="method"
+	       		scope="request"
+       		/>
+
+    </action-mappings>
+
+
+<!-- ======================================== Message Resources Definitions -->
+
+    <message-resources parameter="MessageResources" />
+
+
+<!-- =============================================== Plug Ins Configuration -->
+
+  <!-- ======================================================= Tiles plugin -->
+  <!--
+     This plugin initialize Tiles definition factory. This later can takes some
+	 parameters explained here after. The plugin first read parameters from
+	 web.xml, thenoverload them with parameters defined here. All parameters
+	 are optional.
+     The plugin should be declared in each struts-config file.
+       - definitions-config: (optional)
+            Specify configuration file names. There can be several comma
+		    separated file names (default: ?? )
+       - moduleAware: (optional - struts1.1)
+            Specify if the Tiles definition factory is module aware. If true
+            (default), there will be one factory for each Struts module.
+			If false, there will be one common factory for all module. In this
+            later case, it is still needed to declare one plugin per module.
+            The factory will be initialized with parameters found in the first
+            initialized plugin (generally the one associated with the default
+            module).
+			  true : One factory per module. (default)
+			  false : one single shared factory for all modules
+	   - definitions-parser-validate: (optional)
+	        Specify if xml parser should validate the Tiles configuration file.
+			  true : validate. DTD should be specified in file header (default)
+			  false : no validation
+
+	  Paths found in Tiles definitions are relative to the main context.
+
+      To use this plugin, download and add the Tiles jar to your WEB-INF/lib
+      directory then uncomment the plugin definition below.
+
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+
+      <set-property property="definitions-config"
+                       value="/WEB-INF/tiles-defs.xml" />
+      <set-property property="moduleAware" value="true" />
+    </plug-in>
+  -->  
+
+
+  <!-- =================================================== Validator plugin -->
+
+
+<!-- 
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property
+        property="pathnames"
+        value="/org/apache/struts/validator/validator-rules.xml,
+               /WEB-INF/validation.xml"/>
+  </plug-in>
+ -->
+</struts-config>
+

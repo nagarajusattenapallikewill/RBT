@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.RbtSocialContentPublisher"
+		select-before-update="true" table="RBT_SOCIAL_CONTENT_PUBLISHER">
+		<id column="SEQUENCE_ID" name="sequenceId" type="long"><generator class="native"/></id>		
+		<property column="CLASS_NAME" name="className" type="short" />
+		<property column="CLASS_DATA" length="150" name="classData" type="java.lang.String" />
+		<property column="STATUS" name="status" type="short" />
+	</class>
+</hibernate-mapping>

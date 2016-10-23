@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<project name="${project.name}" default="all" basedir=".">
+
+	<!--
+
+	  * Definitions on the "ant" command line (ant -Dfoo=bar compile).
+
+	  * Definitions present in the build.properties file
+	-->
+
+	<property file="build.properties" />
+
+	<!-- 
+	    	paths used for compilation and run  
+	    	-->
+
+	<path id="lib.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${basedir}/../mobileCore/dist">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${basedir}/../../../output">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+
+
+	<echo message="Main Task Running" />
+
+	<target name="all" depends="war" description="Default target to build the war file">
+
+
+
+	</target>
+
+
+
+
+	<target name="clean" description="Cleans all the classes and output directories">
+		<echo message="Cleaning the directories" />
+		<delete dir="${classes.dir}"/>
+		<delete dir="${build.dir}"/>
+		<ant antfile="build.xml" dir="../mobileCore" target="makeMobileCoreJar">
+			<property name="folderName" value=".."/>
+		</ant>
+	</target>
+
+	<target name="init" description="Making all the temp directories" depends="clean">
+		<echo message="Creating the necessary directories for build" />
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+
+	<target name="compile" description="Compiling all the source files" depends="init">
+		<echo message="Compiling the source files to build directory" />
+
+		<!-- Compile the classes -->
+
+		<javac destdir="${classes.dir}"
+            deprecation="${javac.deprecation}"
+            debug="${javac.debug}"
+            debuglevel="${javac.debuglevel}"
+     		source="1.5">
+			<src path="${src.dir}"/>
+			<classpath refid="lib.path"/>
+		</javac>
+
+		<copy todir="${build.dir}/jsp">
+			<fileset dir="${base.dir}/jsp"/>
+		</copy>
+
+
+		<copy todir="${webinf.dir}">
+			<fileset dir="${base.dir}/WEB-INF">
+				<exclude name="lib/*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${build.dir}">
+			<fileset dir="${base.dir}">
+				<include name="*.*"/>
+				<exclude name="build.xml"/>
+				<exclude name="build.properties"/>
+				<exclude name=".classpath"/>
+				<exclude name=".project"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="war" description="Creating the war file" depends="compile">
+		<echo message="Creating the ESIA.war file in dist folder" />
+		<war destfile="${dist.dir}/${project.name}.war" webxml="${webinf.dir}/web.xml">
+			<fileset dir="${build.dir}"/>
+		</war>
+		<echo message="Deleting the build directory" />
+		<delete dir="${build.dir}"/>
+	</target>
+
+
+</project>

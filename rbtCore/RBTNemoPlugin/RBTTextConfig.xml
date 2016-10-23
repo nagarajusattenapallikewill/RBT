@@ -1,0 +1,19 @@
+<workbook>
+	<worksheet name="Sheet1">
+		<section startRow="0" endRow="0" />
+		<loop startRow="1" endRow="1" items="result" var="RBTText"
+			varType="com.onmobile.apps.ringbacktones.genericcache.beans.RBTText">
+			<section startRow="1" endRow="1">
+				<mapping row="1" col="0">RBTText.type</mapping><!-- Handle this -->
+				<mapping row="1" col="1">RBTText.subType</mapping>
+				<mapping row="1" col="2">RBTText.language</mapping>
+				<mapping row="1" col="3">RBTText.text</mapping>
+			</section>
+			<loopbreakcondition>
+				<rowcheck offset="0">
+					<cellcheck offset="0" />
+				</rowcheck>
+			</loopbreakcondition>
+		</loop>
+	</worksheet>
+</workbook>

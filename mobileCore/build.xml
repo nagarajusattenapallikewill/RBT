@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<project name="${project.name}" default="clean" basedir=".">
+	<property file="build.properties" />
+
+	<!-- 
+	    	paths used for compilation and run  
+	-->
+
+	<path id="lib.path">
+		<fileset dir="./lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="./../../../output">
+					<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="./../../../lib">
+				<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean" depends="makeMobileCoreJar" description="Cleaning build and distribution directories">
+
+	</target>
+
+	<target name="compileMobileCore" description="Compiling all the source files">
+		
+	<!--<ant antfile="build.xml" dir="../../../" target="CompileAll">
+			<property name="folderName" value=".."/>
+	</ant>-->
+		
+	<echo message="Compiling the source files to build directory" />
+	<delete dir="${dist.dir}"/>		
+
+			<!-- Compile the classes -->
+		<mkdir dir="${build.dir}"/>	
+		<mkdir dir="${classes.dir}"/>
+		<mkdir  dir="${dist.dir}"/>
+		<javac destdir="${classes.dir}"
+            deprecation="${javac.deprecation}"
+            debug="${build.debug}"
+     		source="1.5" 
+			includeantruntime="true">
+     	<src path="${basedir}/src"/>
+        
+            <classpath>
+                <path refid="lib.path"/>
+            </classpath>
+			
+		</javac>
+   
+ 
+	</target>
+	<target name="makeMobileCoreJar" depends="compileMobileCore" description="Make mobileCoreJar">
+		<echo message="Building the mobileCore jar file to dist directory" />
+        <jar destfile="${dist.dir}/${jar.name}.jar">
+            <fileset dir="${classes.dir}"/>
+        </jar>
+    </target>
+
+
+	</project>

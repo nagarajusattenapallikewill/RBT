@@ -1,0 +1,1362 @@
+<?xml version="1.0"?>
+
+<project default="makeAllJarAndWar" basedir=".">
+
+    <property environment="env"/>
+	<property name="JDK6" value="D:/software/Java/java1.7/jdk1.7.0_05/bin"/>
+	<property name="build.debug" value="on" /> <!-- (on|off) default is to do a release build -->
+	<property name="build.deprecation" value="off" />
+	<property name="lib-dir" value="${basedir}/../lib"/>
+	<property name="lib-external" value="${basedir}/../lib-external"/>
+	<tstamp>
+		<format property="now" pattern="dd-MM-yyyy HH:mm"/>
+	</tstamp>
+
+	<path id="compile.classpath" >
+		<fileset dir="${lib-dir}">
+			<include name="**/*.jar"/>
+			<exclude name="cdtools.jar"/>
+		</fileset>
+		<fileset dir="${lib-external}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="CreateManifest">
+		<manifest file="MANIFEST.MF">
+			<attribute name="Built-By" value="${user.name}"/>
+			<section name="Product">
+			  <attribute name="Product-Title" value="RBT"/>
+			  <attribute name="Product-Version" value="${branchName}"/>
+			  <attribute name="Product-Vendor" value="OnMobile Global Limited"/>
+			  <attribute name="Creation-Date" value="${now}"/> 
+			</section>
+		  </manifest>
+    </target>
+
+    <target name="compileAirtelCGIRBTWar" depends="clean" description="Compile classes required for airtelCGI.war.">
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}">
+            <src path="${basedir}/src" />
+            <include name="com/onmobile/apps/ringbacktones/common/**"/>
+            <include name="com/onmobile/apps/ringbacktones/content/**"/>
+            <include name="com/onmobile/apps/ringbacktones/subscriptions/**"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeAirtelCGIRBTWar" depends="compileAirtelCGIRBTWar,CreateManifest" description="Make airtelCGI.war">
+		<mkdir dir="${basedir}/output/rbt"/>
+		<mkdir dir="${basedir}/output/rbt/WEB-INF"/>
+		<mkdir dir="${basedir}/output/airtel"/>
+        <delete file="${basedir}/output/airtel/airtelCGI.war"/>
+        <copy todir="${basedir}/output/rbt">
+            <fileset dir="${basedir}/rbt/for-airtel-CGI" />
+        </copy>
+        <copy todir="${basedir}/output/rbt/WEB-INF">
+            <fileset dir="${basedir}/rbt/WEB-INF" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/rbt" classname="org.apache.jasper.JspC">
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/rbt" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/airtel/airtelCGI.war" webxml="${basedir}/output/rbt/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/rbt">
+                <include name="*.jsp"/>
+            </fileset>
+            <classes dir="${basedir}/output/classes"/>
+        </war>
+    </target>
+    
+    <target name="compileInterfacesWar" depends="clean" description="Compile classes required for rbt.war.">
+    	<mkdir dir="${basedir}/output/interfaces/classes"/>
+        <javac destdir="${basedir}/output/interfaces/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+            <include name="com/onmobile/apps/ringbacktones/interfaces/**"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="makeInterfacesWar" depends="compileInterfacesWar,CreateManifest" description="Make interfaces.war">
+        <mkdir dir="${basedir}/output/interfaces"/>
+        <delete file="${basedir}/output/interfaces.war"/>
+        <copy todir="${basedir}/output/interfaces">
+            <fileset dir="${basedir}/interfaces" />
+        </copy>
+        <java dir="${basedir}/output/interfaces" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/output/interfaces"
+               debug="${build.debug}"
+               deprecation="on"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/output/interfaces" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/interfaces.war" webxml="${basedir}/output/interfaces/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+        <zipfileset dir="${basedir}/output/interfaces/classes/com/onmobile/apps/ringbacktones/interfaces/" prefix="WEB-INF/classes/com/onmobile/apps/ringbacktones/interfaces"/>
+		</war>
+    </target>
+
+	<target name="compileAirtelRBTWar" depends="clean" description="Compile classes required for rbt.war.">
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+			<include name="com/onmobile/apps/ringbacktones/common/**"/>
+            <include name="com/onmobile/apps/ringbacktones/content/**"/>
+            <include name="com/onmobile/apps/ringbacktones/subscriptions/**"/>
+            <include name="com/onmobile/apps/ringbacktones/servlets/**"/>
+
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeAirtelRBTWar" depends="compileAirtelRBTWar,CreateManifest" description="Make ccc.war">
+        <mkdir dir="${basedir}/output/ccc"/>
+        <delete file="${basedir}/output/ccc.war"/>
+        <copy todir="${basedir}/output/ccc">
+            <fileset dir="${basedir}/airtelweb" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/ccc" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java> 
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/ccc" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/ccc.war" webxml="${basedir}/output/ccc/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/output/ccc">
+                <include name="*.jsp"/>
+            </fileset>
+            <zipfileset dir="${basedir}/output/ccc/subscriber/" prefix="subscriber"/>
+            <zipfileset dir="${basedir}/output/ccc/common/" prefix="common"/>
+            <zipfileset dir="${basedir}/output/ccc/js/" prefix="js"/>
+			<zipfileset dir="${basedir}/output/ccc/css/" prefix="css"/>
+            <classes dir="${basedir}/output/classes"/>
+			<lib dir="${basedir}/lib">
+			    <include name="antlr.jar"/>
+			    <include name="commons-beanutils.jar"/>
+			    <include name="commons-digester.jar"/>
+			    <include name="commons-fileupload.jar"/>
+			    <include name="commons-logging.jar"/>
+			    <include name="commons-validator.jar"/>
+			    <include name="jakarta-oro.jar"/>
+			    <include name="struts.jar"/>
+				 <include name="common.jar"/>
+				 <include name="sapdbc.jar"/>
+				 <include name="bootstrap_minimal.jar"/>
+			</lib>
+			<webinf dir="${basedir}/airtelweb/WEB-INF">
+			    <include name="struts-bean.tld"/>
+			    <include name="struts-html.tld"/>
+			    <include name="struts-config.xml"/>
+			    <include name="validation.xml"/>
+			    <include name="validator-rules.xml"/>
+			    <include name="struts-logic.tld"/>
+			</webinf>
+            <zipfileset dir="${basedir}/output/ccc/images/" prefix="images"/>
+            <zipfileset dir="${basedir}/output/ccc/img/" prefix="img"/>
+        </war>
+    </target>
+
+	<target name="compileAirtelWar" depends="clean" description="Compile classes required for rbt.war.">
+		<mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+               executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+            <include name="com/onmobile/apps/ringbacktones/common/RBTCommonConfig.java"/>
+			<include name="com/onmobile/apps/ringbacktones/common/Tools.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeAirtelWar" depends="compileAirtelWar,CreateManifest" description="Make crm.war">
+        <mkdir dir="${basedir}/output/crm"/>
+        <delete file="${basedir}/output/crm.war"/>
+        <copy todir="${basedir}/output/crm">
+            <fileset dir="${basedir}/crm" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/crm" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java> 
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/crm" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/crm.war" webxml="${basedir}/output/crm/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/output/crm">
+                <include name="*.jsp"/>
+            </fileset>
+            <zipfileset dir="${basedir}/output/crm/subscriber/" prefix="subscriber"/>
+            <classes dir="${basedir}/output/classes"/>
+			<lib dir="${basedir}/lib">
+			    <include name="antlr.jar"/>
+			    <include name="commons-beanutils.jar"/>
+			    <include name="commons-digester.jar"/>
+			    <include name="commons-fileupload.jar"/>
+			    <include name="commons-logging.jar"/>
+			    <include name="commons-validator.jar"/>
+			    <include name="jakarta-oro.jar"/>
+			    <include name="struts.jar"/>
+				 <include name="common.jar"/>
+				 <include name="sapdbc.jar"/>
+				 <include name="bootstrap_minimal.jar"/>
+			</lib>
+			<webinf dir="${basedir}/crm/WEB-INF">
+			    <include name="struts-bean.tld"/>
+			    <include name="struts-html.tld"/>
+			    <include name="struts-config.xml"/>
+			    <include name="validation.xml"/>
+			    <include name="validator-rules.xml"/>
+			    <include name="struts-logic.tld"/>
+			</webinf>
+        </war>
+    </target>
+	
+	<target name="compileRecordOwnDownloaderWar" depends="clean" description="Compile classes required for rbt.war.">
+		<mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+               executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+			<include name="com/onmobile/apps/ringbacktones/common/Tools.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeRecordOwnDownloaderWar" depends="compileRecordOwnDownloaderWar,CreateManifest" description="Make RecordOwnDownloader.war">
+        <mkdir dir="${basedir}/output/RecordOwnDownloader"/>
+        <delete file="${basedir}/output/RecordOwnDownloader.war"/>
+        <copy todir="${basedir}/output/RecordOwnDownloader">
+            <fileset dir="${basedir}/rbtDownload" />
+        </copy>
+		<echo>test111111</echo>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/RecordOwnDownloader" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java> 
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/RecordOwnDownloader" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/RecordOwnDownloader.war" webxml="${basedir}/output/RecordOwnDownloader/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/output/RecordOwnDownloader">
+                <include name="*.jsp"/>
+            </fileset>
+            <zipfileset dir="${basedir}/output/RecordOwnDownloader/"/>
+            <classes dir="${basedir}/output/classes"/>
+			
+			<webinf dir="${basedir}/rbtDownload/WEB-INF">
+			   </webinf>
+        </war>
+    </target>
+
+	<target name="compileUSSDWar" depends="clean" >
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+			<include name="com/onmobile/apps/ringbacktones/ussd/**"/>
+			<include name="com/onmobile/apps/ringbacktones/servlets/SiteURLDetails"/>
+		    <include name="com/onmobile/apps/ringbacktones/servlets/ResponseObj"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeUSSDWar" depends="compileUSSDWar,CreateManifest" description="Make ussd.war">
+        <mkdir dir="${basedir}/output/ussd"/>
+        <delete file="${basedir}/output/ussd.war"/>
+        <copy todir="${basedir}/output/ussd/WEB-INF/">
+            <fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF/" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7"
+               deprecation="on">
+            <src path="${basedir}/output/ussd" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/ussd.war" webxml="${basedir}/output/ussd/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/output/ussd">
+                <include name="*.jsp"/>
+				
+            </fileset>
+            <classes dir="${basedir}/output/classes">
+				<exclude name="com/onmobile/apps/ringbacktones/genericcache/**"/>
+				<exclude name="com/onmobile/apps/ringbacktones/webservice/**"/>
+			</classes>
+			<lib dir="${basedir}/lib">
+			    <include name="antlr.jar"/>
+			    <include name="commons-beanutils.jar"/>
+			    <include name="commons-digester.jar"/>
+			    <include name="commons-fileupload.jar"/>
+			    <include name="commons-logging.jar"/>
+			    <include name="commons-validator.jar"/>
+			    <include name="jakarta-oro.jar"/>
+			    <include name="struts.jar"/>
+				 <include name="common.jar"/>
+				 <include name="sapdbc.jar"/>
+				 <include name="bootstrap_minimal.jar"/>
+			</lib>
+			<webinf dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF">
+			</webinf>
+        </war>
+    </target>
+    <target name="makeUSSDWar-tatagsm" depends="clean" description="Make tatagsmussd.war">
+    	<echo message="Deleting the output directory.."/>
+        <delete dir="${basedir}/output/"/>
+        <echo message="creating the output directory.."/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <echo message="Compiling tatata gsm USSD sources.."/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7"
+               deprecation="on">
+            <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/tatagsm" />
+            <include name="*.java"/>
+            <classpath>
+      			<fileset dir="${basedir}/lib">
+        			<include name="**/*.jar"/>
+      			</fileset>
+           </classpath>
+        </javac>
+        <war destfile="${basedir}/output/tatagsmussd.war" webxml="${basedir}/config/tatagsm-ussd/WEB-INF/web.xml">
+            <classes dir="${basedir}/output/classes"/>
+			<lib dir="${basedir}/lib">
+				<include name="antlr.jar"/>
+				<include name="c3p0-0.9.1.jar"/>
+				<include name="cglib.jar"/>
+				<include name="commons-codec-1.3.jar"/>
+				<include name="commons-collections.jar"/>
+				<include name="commons-httpclient-3.0.1.jar"/>
+				<include name="commons-logging-1.0.4.jar"/>
+				<include name="dom4j.jar"/>
+				<include name="hibernate3.jar"/>
+				<include name="java_memcached-release_2.0.1.jar"/>
+				<include name="jta.jar"/>
+				<include name="log4j-1.2.8.jar"/>
+				<include name="mysql-connector-java-5.1.6-bin.jar"/>
+				<include name="rbt.jar"/>
+				<include name="rbtclient.jar"/>
+				<include name="rbtcontent.jar"/>
+				<include name="sapdbcnew.jar"/>
+			</lib>
+			<!--webinf dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF"></webinf-->
+        </war>
+    </target>
+
+    <target name="makeAllJarAndWar" depends="makeRbtCommonJar" description="Makes rbt.jar, rbt.jar, rbt.war"/>
+    
+    <!-- Special target to check for completion of ant target as exit codes are not propagated to windows correctly-->
+    <target name="touchtempfile" description="Touches a file ">
+        <touch file="ant_check_file.txt"/>
+    </target>
+    
+    <target name="generateReleaseJar" description="Generate release jar.">
+        <fail
+            unless="releaseTagName"
+            message="Property releaseTagName not set : use -DreleaseTagName={yourTag}"
+        />
+        <exec dir="." executable="python" failonerror="yes">
+            <arg value="${basedir}/buildutil/generate-release-jar.py"/>
+            <arg value="${basedir}"/>
+            <arg value="${releaseTagName}"/>
+            <arg value="${makeJarTarget}"/>
+        </exec>
+    </target>
+    
+   <target name="makeReleaseJar" description="Make release jar.">
+        <fail
+            unless="tagDateMmDdYyyy"
+            message="Property tagDateMmDdYyyy not set"
+        />
+        <fail
+            unless="tagJarVersion"
+            message="Property tagJarVersion not set"
+        />
+        <fail
+            unless="jarName"
+            message="Property jarName not set"
+        />
+        <mkdir dir="${basedir}/output/temp"/>
+        <unzip src="${basedir}/output/${jarName}.jar" dest="${basedir}/output/temp"/>
+        <touch datetime="${tagDateMmDdYyyy} 00:00 am">
+            <fileset dir="${basedir}/output/temp"/>
+        </touch>
+        <mkdir dir="${basedir}/output/final"/>
+        <!--delete file="${basedir}/output/final/${jarName}-${tagJarVersion}.jar"/>
+        <zip destFile="${basedir}/output/final/${jarName}-${tagJarVersion}.jar" basedir="${basedir}/output/temp"/-->
+        <delete file="${basedir}/output/final/${jarName}.jar"/>
+        <zip destFile="${basedir}/output/final/${jarName}.jar" basedir="${basedir}/output/temp"/>
+        <delete dir="${basedir}/output/temp"/>
+    </target>
+
+    <target name="makeReleaseWar" description="Make release RBT war.">
+        <fail
+            unless="tagDateMmDdYyyy"
+            message="Property tagDateMmDdYyyy not set"
+        />
+        <fail
+            unless="tagJarVersion"
+            message="Property tagJarVersion not set"
+        />
+        <fail
+            unless="warName"
+            message="Property warName not set"
+        />
+        <mkdir dir="${basedir}/output/temp"/>
+        <unzip src="${basedir}/output/${warName}.war" dest="${basedir}/output/temp"/>
+        <touch datetime="${tagDateMmDdYyyy} 00:00 am">
+            <fileset dir="${basedir}/output/temp"/>
+        </touch>
+        <mkdir dir="${basedir}/output/final"/>
+        <!--delete file="${basedir}/output/final/${warName}-${tagJarVersion}.war"/>
+        <zip destFile="${basedir}/output/final/${warName}-${tagJarVersion}.war" basedir="${basedir}/output/temp"/-->
+        <delete file="${basedir}/output/final/${warName}.war"/>
+        <zip destFile="${basedir}/output/final/${warName}.war" basedir="${basedir}/output/temp"/>
+        <delete dir="${basedir}/output/temp"/>
+    </target>
+    
+    <target name="generateReleaseRBTJar" description="Generate release RBT jar.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeRBTJar"/>
+        </antcall>
+    </target>
+  
+    <target name="generateReleaseRBTWar" description="Generate release RBT war.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeRBTWar"/>
+        </antcall>
+    </target>
+
+    <target name="generateReleaseInterfacesWar" description="Generate release RBT war.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeInterfacesWar"/>
+        </antcall>
+    </target>
+
+    <target name="generateReleaseAllJarAndWar" depends="generateReleaseRBTJar,generateReleaseRBTWar,generateReleaseInterfacesWar" description="Generate all release jar and war">
+    </target>
+
+	<!-- Make jar files for TATA -->
+
+	<target name="compileTataRBTReporter" depends="clean" description="Compile classes required for Tata rbtreporter.jar.">
+		<echo message="************ Compile Tata RBT Reproter Jar ***************"/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+               debug="${build.debug}"
+               deprecation="${build.deprecation}">
+            <src path="${basedir}/src" />
+            <include name="com/onmobile/apps/ringbacktones/common/**"/>
+            <include name="com/onmobile/apps/ringbacktones/content/**"/>
+            <include name="com/onmobile/apps/ringbacktones/bulkreporter/**"/>           			
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeTataRBTReporterJar" depends="compileTataRBTReporter,CreateManifest" description="Make Tata rbtreporter.jar">
+        <delete file="${basedir}/output/tata/rbtreporter.jar"/>
+		<mkdir dir="${basedir}/output/tata"/>
+        <jar destfile="${basedir}/output/tata/rbtreporter.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/classes"/>
+            <zipfileset dir="${basedir}/resources" prefix="resources" excludes="RBT.xml"/>			
+			<!--zipfileset dir="${basedir}/resources" includes="tata/RBT.xml" fullpath="resources/RBT.xml"/-->          
+        </jar>
+    </target>	
+
+	<!--tata war-->
+	<target name="compileTataRBTWar" depends="clean" description="Compile classes required for rbt.war.">
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+               deprecation="${build.deprecation}">
+			<src path="${basedir}/src" />
+			<include name="com/onmobile/apps/ringbacktones/common/**"/>
+            <include name="com/onmobile/apps/ringbacktones/content/**"/>
+            <include name="com/onmobile/apps/ringbacktones/subscriptionsImpl/**"/>
+            <include name="com/onmobile/apps/ringbacktones/webservice/**"/>
+			<classpath>
+              <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeTataRBTWar" depends="compileTataRBTWar,CreateManifest" description="Make rbt.war">
+        <mkdir dir="${basedir}/output/rbt"/>
+        <delete file="${basedir}/output/tata/rbt.war"/>
+        <copy todir="${basedir}/output/rbt">
+            <fileset dir="${basedir}/rbtImpl" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/rbt" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/rbt" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+		<mkdir dir="${basedir}/output/tata"/>
+        <war destfile="${basedir}/output/tata/rbt.war" webxml="${basedir}/output/rbt/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/rbt">
+                <include name="*.jsp"/>
+				<include name="*.html"/>
+            </fileset>
+            <zipfileset dir="${basedir}/output/rbt/javascripts/" prefix="javascripts"/>
+            <classes dir="${basedir}/output/classes"/>
+            <zipfileset dir="${basedir}/output/rbt/images/" prefix="images"/>
+        </war>
+    </target>
+
+	<!--tata BulkActivation war-->
+	<target name="compileTataBulkActivationWar" depends="clean" description="Compile classes required for rbt.war.">
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+               deprecation="${build.deprecation}"  includes="com/onmobile/apps/ringbacktones/common/**,com/onmobile/apps/ringbacktones/content/**,com/onmobile/apps/ringbacktones/subscriptionsImpl/**,com/onmobile/apps/ringbacktones/utils/**,com/onmobile/apps/ringbacktones/timer/**"  
+			   srcdir="${basedir}/src">
+			<classpath>
+              <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeTataBulkActivationWar" depends="compileTataBulkActivationWar,CreateManifest" description="Make BulkActivation.war">
+        <mkdir dir="${basedir}/output/rbt"/>
+        <delete file="${basedir}/output/tata/BulkActivation.war"/>
+        <copy todir="${basedir}/output/rbt">
+            <fileset dir="${basedir}/BulkActivation" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/rbt" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="./jsp"/>
+        </java>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/rbt" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+		<mkdir dir="${basedir}/output/tata"/>
+        <war destfile="${basedir}/output/tata/BulkActivation.war" webxml="${basedir}/output/rbt/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/rbt">
+                <include name="*.jsp"/>
+				<include name="*.html"/>
+            </fileset>
+			<zipfileset dir="${basedir}/output/rbt/jsp/" prefix="jsp"/>
+            <zipfileset dir="${basedir}/output/rbt/javascripts/" prefix="javascripts"/>
+            <classes dir="${basedir}/output/classes"/>
+            <zipfileset dir="${basedir}/output/rbt/images/" prefix="images"/>
+        </war>
+    </target>
+
+	<target name="generateReleaseTataRBTReporterJar" description="Generate release RBTReporter jar.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeTataRBTReporterJar"/>
+        </antcall>
+    </target>
+
+	<target name="generateReleaseTataRBTWar" description="Generate release RBT war.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeTataRBTWar"/>
+        </antcall>
+    </target>
+
+	<target name="generateReleaseTataBulkActivationWar" description="Generate release BulkActivation war.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeTataBulkActivationWar"/>
+        </antcall>
+    </target>
+
+	<target name="makeReleaseTataJar" description="Make release tata jar.">
+        <fail
+            unless="tagDateMmDdYyyy"
+            message="Property tagDateMmDdYyyy not set"
+        />
+        <fail
+            unless="tagJarVersion"
+            message="Property tagJarVersion not set"
+        />
+        <fail
+            unless="jarName"
+            message="Property jarName not set"
+        />
+        <mkdir dir="${basedir}/output/temp"/>
+        <unzip src="${basedir}/output/tata/${jarName}.jar" dest="${basedir}/output/temp"/>
+        <touch datetime="${tagDateMmDdYyyy} 00:00 am">
+            <fileset dir="${basedir}/output/temp"/>
+        </touch>
+        <mkdir dir="${basedir}/output/final/tata"/>
+        <!--delete file="${basedir}/output/final/tata/${jarName}-${tagJarVersion}.jar"/>
+        <zip destFile="${basedir}/output/final/tata/${jarName}-${tagJarVersion}.jar" basedir="${basedir}/output/temp"/-->
+        <delete file="${basedir}/output/final/tata/${jarName}.jar"/>
+        <zip destFile="${basedir}/output/final/tata/${jarName}.jar" basedir="${basedir}/output/temp"/>
+        <delete dir="${basedir}/output/temp"/>
+    </target>
+
+	<target name="makeReleaseTataWar" description="Make release Tata war.">
+        <fail
+            unless="tagDateMmDdYyyy"
+            message="Property tagDateMmDdYyyy not set"
+        />
+        <fail
+            unless="tagJarVersion"
+            message="Property tagJarVersion not set"
+        />
+        <fail
+            unless="warName"
+            message="Property warName not set"
+        />
+        <mkdir dir="${basedir}/output/temp"/>
+        <unzip src="${basedir}/output/tata/${warName}.war" dest="${basedir}/output/temp"/>
+        <touch datetime="${tagDateMmDdYyyy} 00:00 am">
+            <fileset dir="${basedir}/output/temp"/>
+        </touch>
+        <mkdir dir="${basedir}/output/final/tata"/>
+        <!--delete file="${basedir}/output/final/tata/${warName}-${tagJarVersion}.war"/>
+        <zip destFile="${basedir}/output/final/tata/${warName}-${tagJarVersion}.war" basedir="${basedir}/output/temp"/-->
+        <delete file="${basedir}/output/final/tata/${warName}.war"/>
+        <zip destFile="${basedir}/output/final/tata/${warName}.war" basedir="${basedir}/output/temp"/>
+        <delete dir="${basedir}/output/temp"/>
+    </target>
+
+	<!-- Make jar files for Airtel -->
+	<target name="compileAirtelCGI" depends="clean" description="Compile classes required for airtelcgi.jar.">
+		<echo message="************ Compile Airtel CGI ***************"/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+               debug="${build.debug}"
+               deprecation="${build.deprecation}">
+            <src path="${basedir}/src" />
+            <include name="com/onmobile/apps/ringbacktones/airtelcgi/**"/>			
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeAirtelCGIJar" depends="compileAirtelCGI,CreateManifest" description="Make airtelcgi.jar">
+        <delete file="${basedir}/output/airtel/airtelcgi.jar"/>
+		<mkdir dir="${basedir}/output/airtel"/>
+        <jar destfile="${basedir}/output/airtel/airtelcgi.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/classes"/>
+		</jar>
+    </target>
+
+	<target name="compileAirtelCGIWar" depends="clean" description="Compile classes required for airtelcgi.war.">
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+               deprecation="${build.deprecation}"  includes="com/onmobile/apps/ringbacktones/airtelcgi/**"  
+			   srcdir="${basedir}/src">
+			<classpath>
+              <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+	<target name="makeAirtelCGIWar" depends="compileAirtelCGIWar,CreateManifest" description="Make airtelcgi.war">
+        <mkdir dir="${basedir}/output/rbt"/>
+        <delete file="${basedir}/output/airtel/airtelcgi.war"/>
+        <copy todir="${basedir}/output/rbt">
+            <fileset dir="${basedir}/airtelcgi" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/rbt" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on">
+            <src path="${basedir}/output/rbt" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+		<mkdir dir="${basedir}/output/airtel"/>
+        <war destfile="${basedir}/output/airtel/airtelcgi.war" needxmlfile="false" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/rbt">
+                <include name="*.jsp"/>
+            </fileset>
+            <classes dir="${basedir}/output/classes"/>
+        </war>
+    </target>
+
+	<target name="makeReleaseAirtelJar" description="Make release airtel jar.">
+        <fail
+            unless="tagDateMmDdYyyy"
+            message="Property tagDateMmDdYyyy not set"
+        />
+        <fail
+            unless="tagJarVersion"
+            message="Property tagJarVersion not set"
+        />
+        <fail
+            unless="jarName"
+            message="Property jarName not set"
+        />
+        <mkdir dir="${basedir}/output/temp"/>
+        <unzip src="${basedir}/output/airtel/${jarName}.jar" dest="${basedir}/output/temp"/>
+        <touch datetime="${tagDateMmDdYyyy} 00:00 am">
+            <fileset dir="${basedir}/output/temp"/>
+        </touch>
+        <mkdir dir="${basedir}/output/final/airtel"/>
+        <!--delete file="${basedir}/output/final/tata/${jarName}-${tagJarVersion}.jar"/>
+        <zip destFile="${basedir}/output/final/tata/${jarName}-${tagJarVersion}.jar" basedir="${basedir}/output/temp"/-->
+        <delete file="${basedir}/output/final/airtel/${jarName}.jar"/>
+        <zip destFile="${basedir}/output/final/airtel/${jarName}.jar" basedir="${basedir}/output/temp"/>
+        <delete dir="${basedir}/output/temp"/>
+    </target>
+	
+	<target name="compileStartCopyWar" depends="clean" description="Compile classes required for startcopy.war.">
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+               deprecation="${build.deprecation}">
+            <src path="${basedir}/src" />
+			<include name="com/onmobile/apps/ringbacktones/common/**"/>
+            <include name="com/onmobile/apps/ringbacktones/content/**"/>
+            <include name="com/onmobile/apps/ringbacktones/subscriptions/**"/>
+			<classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="makeStartCopyWar" depends="compileStartCopyWar,CreateManifest" description="Make startcopy.war">
+        <delete dir="${basedir}/output/temp"/>
+		<mkdir dir="${basedir}/output/startcopy"/>
+        <copy todir="${basedir}/output/startcopy">
+            <fileset dir="${basedir}/startcopy" />
+        </copy>
+        <copy todir="${basedir}/output/startcopy/WEB-INF">
+            <fileset dir="${basedir}/startcopy/WEB-INF" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <java dir="${basedir}/output/startcopy" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java> 
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+   			   executable="${JDK6}/bin/javac"
+			   compiler="javac1.7" 
+               deprecation="on">
+            <src path="${basedir}/output/startcopy" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/startcopy.war" webxml="${basedir}/output/startcopy/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/output/startcopy">
+                <include name="*.jsp"/>
+            </fileset>
+            <classes dir="${basedir}/output/classes"/>
+        </war>
+    </target>
+	
+
+	<target name="generateReleaseRBTContentJar" description="Generate release RBTContent jar.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeRBTContentJar"/>
+        </antcall>
+    </target>
+
+	<target name="compileRBT" depends="clean" description="Compile classes required for rbt.jar.">
+        <mkdir dir="${basedir}/../output/classes"/>
+        <javac destdir="${basedir}/../output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" 
+			   memoryinitialsize="256m"
+			   memorymaximumsize="512m">
+            <src path="${basedir}/src" />
+            <!--<include name="com/onmobile/apps/ringbacktones/**"/>-->
+			<include name="com/onmobile/apps/ringbacktones/eventlogging/**"/>
+            <include name="com/onmobile/apps/ringbacktones/wrappers/**"/>
+            <include name="com/onmobile/apps/ringbacktones/tools/**"/>
+            <include name="com/onmobile/apps/ringbacktones/logging/**"/>
+            <include name="com/onmobile/apps/ringbacktones/logger/**"/>
+            <include name="com/onmobile/apps/ringbacktones/cache/**"/>
+            <include name="com/onmobile/apps/ringbacktones/content/**"/>
+            <include name="com/onmobile/apps/ringbacktones/daemons/**"/>
+			<include name="com/onmobile/apps/ringbacktones/hunterFramework/**"/>
+            <include name="com/onmobile/apps/ringbacktones/Gatherer/**"/>
+			<include name="com/onmobile/apps/ringbacktones/genericcache/**"/>
+            <include name="com/onmobile/apps/ringbacktones/callloganalyzer/**"/>
+            <include name="com/onmobile/apps/ringbacktones/promotions/**"/>
+			<include name="com/onmobile/apps/ringbacktones/provisioning/**"/>
+			<include name="com/onmobile/apps/ringbacktones/services/**"/>
+            <include name="com/onmobile/apps/ringbacktones/subscriptions/**"/>
+			<include name="com/onmobile/apps/ringbacktones/webservice/**"/>
+        	<include name="com/onmobile/apps/ringbacktones/interfaces/**"/>
+        	<include name="com/onmobile/apps/ringbacktones/monitor/**"/>
+        	<include name="com/onmobile/apps/ringbacktones/smClient/**"/>
+			<include name="com/onmobile/apps/ringbacktones/thirdparty/**"/>
+			<include name="com/onmobile/apps/ringbacktones/wsdl/**"/>
+			<include name="com/onmobile/apps/ringbacktones/common/**"/>
+			<include name="com/onmobile/apps/ringbacktones/rbtCommon/**"/>
+			<include name="com/onmobile/apps/ringbacktones/utils/**"/>
+			<include name="com/onmobile/apps/ringbacktones/bulkreporter/**"/>
+			<include name="com/onmobile/apps/ringbacktones/subscriptionsImpl/**"/>
+			<include name="com/onmobile/apps/ringbacktones/v2/**"/>
+			<include name="com/onmobile/apps/ringbacktones/rbt2/**"/>
+			<include name="com/onmobile/apps/ringbacktones/service/**"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneIndexerFactory.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/DefaultLuceneIndexer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/DefaultSolrSupportIndexer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneInitializer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneCategory.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneClip.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/AbstractLuceneIndexer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/RBTLuceneException.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/solr/*"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/msearch/*"/>			
+			<include name="com/onmobile/apps/ringbacktones/activemonitoring/core/**"/>
+			<!--<src path="${basedir}/rbtcontentjar/src" />
+			<include name="com/onmobile/apps/ringbacktones/rbtcontents/**"/>
+			<exclude name="com/onmobile/apps/ringbacktones/webservice/**"/>-->
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+    
+    
+
+	<target name="generateReleaseNewRBTJar" description="Generate release RBT jar.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeNewRBTJar"/>
+        </antcall>
+    </target>  
+	
+	<target name="generateReleaseNewRBTWar" description="Generate release RBT war.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeNewRBTWar"/>
+        </antcall>
+    </target>
+
+	<target name="compileLuceneRBTJar" depends="clean" description="Compile classes required for luceneRbt.jar.">
+	<mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneIndexerFactory.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/DefaultLuceneIndexer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/DefaultSolrSupportIndexer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneInitializer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneCategory.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/LuceneClip.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/AbstractLuceneIndexer.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/RBTLuceneException.java"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/solr/*"/>
+			<include name="com/onmobile/apps/ringbacktones/lucene/msearch/*"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>	 
+
+	<target name="generateReleaseLuceneRBTJar" description="Generate release luceneRBT jar.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeLuceneRBTJar"/>
+        </antcall>
+    </target>	  
+
+	<target name="compileRBTDNCTOJar" depends="clean" description="Compile classes required for rbtdncto.jar.">
+		<echo message="*************** Compile RBTDNCTO Jar ******************"></echo>
+        <mkdir dir="${basedir}/output/classes"/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="${build.deprecation}"
+               executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/src" />
+            <include name="com/onmobile/apps/ringbacktones/dncto/**"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+    </target>
+
+	<target name="makeRBTDNCTOJar" depends="compileRBTDNCTOJar,CreateManifest" description="Make rbtdncto.jar">
+        <delete file="${basedir}/output/rbtdncto.jar"/>
+        <mkdir dir="${basedir}/output"/>
+        <jar destfile="${basedir}/output/rbtdncto.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/classes" />
+        </jar>
+    </target>
+
+	<target name="generateReleaseRBTDNCTOJar" description="Generate release rbtdncto.jar.">
+        <antcall target="generateReleaseJar">
+            <param name="makeJarTarget" value="makeRBTDNCTOJar"/>
+        </antcall>
+    </target>
+
+	<target name="makeNewStartCopyWar" depends="compileRBT,CreateManifest" description="Make startcopy.war">
+        <mkdir dir="${basedir}/output/startcopy"/>
+        <delete file="${basedir}/output/startcopy.war"/>
+        <copy todir="${basedir}/output/startcopy">
+            <fileset dir="${basedir}/startcopy" />
+        </copy>
+        <delete dir="${basedir}/output/CVS/"/>
+        <delete dir="${basedir}/output/startcopy/for-airtel-CGI"/>
+        <java dir="${basedir}/output/startcopy" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+               deprecation="on"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/output/startcopy" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/output/startcopy.war" webxml="${basedir}/startcopy/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/output/startcopy">
+                <include name="*.jsp"/>
+            </fileset>
+           
+        </war>
+    </target>
+	<target name="makeUSSDWar-airtelprofile" depends="clean" description="Make airtelprofile.war">
+    	<echo message="Deleting the output directory.."/>
+        <delete dir="${basedir}/output/"/>
+        <echo message="creating the output directory.."/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <echo message="Compiling airtelprofile USSD sources.."/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7"
+               deprecation="on">
+            <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtelprofile"/>
+			<src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/common"/>
+            <include name="*.java"/>
+            <classpath>
+      			<fileset dir="${basedir}/lib">
+        			<include name="**/*.jar"/>
+      			</fileset>
+           </classpath>
+        </javac>
+        <war destfile="${basedir}/output/airtelprofile.war" webxml="${basedir}/config/airtelprofile-ussd/WEB-INF/web.xml">
+            <classes dir="${basedir}/output/classes"/>
+			<!--webinf dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF"></webinf-->
+        </war>
+    </target>
+	<target name="makeUSSDWar-airtel" depends="clean" description="Make airtelussd.war">
+    	<echo message="Deleting the output directory.."/>
+        <delete dir="${basedir}/output/"/>
+        <echo message="creating the output directory.."/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <echo message="Compiling airtel USSD sources.."/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7"
+               deprecation="on">
+             <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtelprofile"/>
+            <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtel"/>
+			<src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/common"/>
+            <include name="*.java"/>
+            <classpath>
+      			<fileset dir="${basedir}/lib">
+        			<include name="**/*.jar"/>
+      			</fileset>
+           </classpath>
+        </javac>
+        <war destfile="${basedir}/output/airtelussd.war" webxml="${basedir}/config/airtel-ussd/WEB-INF/web.xml">
+            <classes dir="${basedir}/output/classes"/>
+			<!--webinf dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF"></webinf-->
+        </war>
+    </target>
+
+	<target name="makeUSSDWar-aircel" depends="clean" description="Make aircelussd.war">
+    	<echo message="Deleting the output directory.."/>
+        <delete dir="${basedir}/output/"/>
+        <echo message="creating the output directory.."/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <echo message="Compiling aircel USSD sources.."/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7"
+               deprecation="on">
+             <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtelprofile"/>
+            <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/aircel"/>
+			 <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtel"/>
+			<src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/common"/>
+            <include name="*.java"/>
+            <classpath>
+      			<fileset dir="${basedir}/lib">
+        			<include name="**/*.jar"/>
+      			</fileset>
+           </classpath>
+        </javac>
+        <war destfile="${basedir}/output/aircelussd.war" webxml="${basedir}/config/aircel-ussd/WEB-INF/web.xml">
+            <classes dir="${basedir}/output/classes"/>
+			<!--webinf dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF"></webinf-->
+        </war>
+    </target>
+
+
+	<target name="makeUSSDWar-mexico" depends="clean" description="Make mexicoussd.war">
+    	<echo message="Deleting the output directory.."/>
+        <delete dir="${basedir}/output/"/>
+        <echo message="creating the output directory.."/>
+        <mkdir dir="${basedir}/output/classes"/>
+        <echo message="Compiling mexico USSD sources.."/>
+        <javac destdir="${basedir}/output/classes"
+               debug="${build.debug}"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7"
+               deprecation="on">
+             <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtelprofile"/>
+            <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/mexico"/>
+			 <src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/airtel"/>
+			<src path="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/common"/>
+            <include name="*.java"/>
+            <classpath>
+      			<fileset dir="${basedir}/lib">
+        			<include name="**/*.jar"/>
+      			</fileset>
+           </classpath>
+        </javac>
+        <war destfile="${basedir}/output/mexicoussd.war" webxml="${basedir}/config/mexico-ussd/WEB-INF/web.xml">
+            <classes dir="${basedir}/output/classes"/>
+			<!--webinf dir="${basedir}/src/com/onmobile/apps/ringbacktones/ussd/WEB-INF"></webinf-->
+        </war>
+    </target>
+	
+	
+	<target name="compilerbtRBTInstall" depends="clean" description="Compile classes required rbtInstall.jar."> 	 
+             <mkdir dir="${basedir}/../output/install/classes"/> 	 
+             <javac destdir="${basedir}/../output/install/classes" 	 
+                    debug="${build.debug}" 	 
+                    deprecation="${build.deprecation}" 	 
+                    executable="${JDK6}/bin/javac" 	 
+                    compiler="javac1.7" > 	 
+                 <src path="${basedir}/../install/src" /> 	 
+                 <classpath> 	 
+                     <path refid="compile.classpath"/> 	 
+                 </classpath> 	 
+  	         </javac> 	 
+  	  </target>
+	 <target name="makeRBTInstaller" depends="compilerbtRBTInstall,CreateManifest" description="Makes rbtInstall.jar"> 	 
+         <delete file="${basedir}/../output/rbtInstall.jar"/> 	 
+         <copy todir="${basedir}/../output/classes/com/onmobile/apps/ringbacktones/genericcache/"> 	 
+                 <fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/genericcache/"> 	 
+                     <include name="**/*.xml"/> 	 
+                 </fileset> 	 
+         </copy> 	 
+         <jar destfile="${basedir}/../output/rbtInstall.jar" manifest="MANIFEST.MF"> 	 
+             <fileset dir="${basedir}/../output/install/classes" /> 	 
+         </jar> 	 
+    </target>
+	
+	<!--Added changes here-->
+	<target name="makeRBTWar" depends="compileRBT,CreateManifest" description="Make rbt.war">
+        <mkdir dir="${basedir}/../output/rbt"/>
+		<mkdir dir="${basedir}/../output/rbt/WEB-INF"/>
+        <delete file="${basedir}/../output/rbt.war"/>
+        <copy todir="${basedir}/../output/rbt">
+            <fileset dir="${basedir}/rbt" />
+        </copy>
+        <delete dir="${basedir}/../output/CVS/"/>
+        <delete dir="${basedir}/../output/rbt/for-airtel-CGI"/>
+        <copy todir="${basedir}/../output/rbt/WEB-INF/">
+            <fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/thirdparty/tefspain/WEB-INF">
+				<include name="deploy.wsdd" />
+				<include name="undeploy.wsdd" />
+				<include name="server-config.wsdd" />
+			</fileset>
+        </copy>
+        <java dir="${basedir}/../output/rbt" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/../output/classes"
+               debug="${build.debug}"
+               deprecation="on"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/../output/rbt" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/../output/rbt.war" webxml="${basedir}/rbt/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/../output/rbt">
+                <include name="*.jsp"/>
+            </fileset>
+			<fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/thirdparty/tefspain/WEB-INF">
+                <include name="*.wsdl"/>
+            </fileset>
+			<zipfileset dir="${basedir}/../output/rbt/WEB-INF/" prefix="WEB-INF"/>
+            <zipfileset dir="${basedir}/../output/rbt/javascripts/" prefix="javascripts"/>
+            <zipfileset dir="${basedir}/../output/rbt/images/" prefix="images"/>
+        </war>
+    </target>
+
+	<target name="makeEasyRechargeWar" depends="compileRBT,CreateManifest" description="Make rbt.war">
+        <mkdir dir="${basedir}/../output/easyrecharge"/>
+		<mkdir dir="${basedir}/../output/easyrecharge/WEB-INF"/>
+        <delete file="${basedir}/../output/easycharge.war"/>
+        <copy todir="${basedir}/../output/easyrecharge">
+            <fileset dir="${basedir}/easyrecharge" />
+        </copy>
+        <delete dir="${basedir}/../output/CVS/"/>
+        <delete dir="${basedir}/../output/easyrecharge/for-airtel-CGI"/>        
+        <java dir="${basedir}/../output/easyrecharge" classname="org.apache.jasper.JspC" >
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <arg value="-webapp"/>
+            <arg value="."/>
+        </java>
+        <javac destdir="${basedir}/../output/classes"
+               debug="${build.debug}"
+               deprecation="on"
+			   executable="${JDK6}/bin/javac"
+               compiler="javac1.7" >
+            <src path="${basedir}/../output/easyrecharge" />
+            <include name="*.java"/>
+            <classpath>
+                <path refid="compile.classpath" />
+            </classpath>
+        </javac>
+        <war destfile="${basedir}/../output/easycharge.war" webxml="${basedir}/easyrecharge/WEB-INF/web.xml"  manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/../output/easyrecharge">
+                <include name="*.jsp"/>
+            </fileset>			
+			<zipfileset dir="${basedir}/../output/easyrecharge/WEB-INF/" prefix="WEB-INF"/>
+        </war>
+    </target>
+	
+	<target name="makeLuceneRBTJar" depends="compileRBT,CreateManifest" description="Make luceneRbt.jar">
+	         <delete file="${basedir}/../output/luceneRbt.jar"/>
+			 <delete dir="${basedir}/../output/classes/com/onmobile/apps/ringbacktones/webservice/"/>
+        <jar destfile="${basedir}/../output/luceneRbt.jar" manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/../output/classes" >
+				<include name="com/onmobile/apps/ringbacktones/lucene/**"/>
+			</fileset>
+        </jar>
+    </target>
+	
+	<target name="makeNewRBTJar" depends="compileRBT,CreateManifest" description="Make rbt.jar">
+        <delete file="${basedir}/../output/rbt.jar"/>
+    	<copy todir="${basedir}/../output/classes/com/onmobile/apps/ringbacktones/daemons/interoperator/bean/">
+    		<fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/daemons/interoperator/bean/">
+    			<include name="**/*.xml"/>
+    		</fileset>
+    	</copy>
+		<copy todir="${basedir}/../output/classes/com/onmobile/apps/ringbacktones/daemons/contentinteroperator/bean/">
+    		<fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/daemons/contentinteroperator/bean/">
+    			<include name="**/*.xml"/>
+    		</fileset>
+    	</copy>
+		<copy todir="${basedir}/../output/classes/com/onmobile/apps/ringbacktones/promotions/callgraph/">
+    		<fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/promotions/callgraph/">
+    			<include name="**/*.xml"/>
+    		</fileset>
+    	</copy>
+    	<jar destfile="${basedir}/../output/rbt.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/../output/classes">
+				<exclude name="com/onmobile/apps/ringbacktones/common/**"/>
+				<exclude name="com/onmobile/apps/ringbacktones/genericcache/**"/>
+				<exclude name="com/onmobile/apps/ringbacktones/rbtCommon/**"/>
+				<exclude name="com/onmobile/apps/ringbacktones/rbtcontents/**"/>
+				<exclude name="com/onmobile/apps/ringbacktones/lucene/**"/>
+			</fileset>
+            <zipfileset dir="${basedir}/resources" prefix="resources"/>
+        </jar>
+    </target>
+	
+	<target name="makeRBTContentJar" depends="compileRBT,CreateManifest" description="Make rbtcontent.jar">
+        <delete file="${basedir}/../output/rbtcontent.jar"/>
+        <mkdir dir="${basedir}/../output"/>
+        <jar destfile="${basedir}/../output/rbtcontent.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/../output/classes" >
+				<include name="com/onmobile/apps/ringbacktones/webservice/content/**"/>
+				<include name="com/onmobile/apps/ringbacktones/webservice/common/**"/>
+				<include name="com/onmobile/apps/ringbacktones/hunterFramework/management/**"/>
+				<include name="com/onmobile/apps/ringbacktones/daemons/Ozonized.class"/>
+			</fileset>
+        </jar>
+    </target>
+	
+	<target name="makeRBTGenericCacheJar" depends="compileRBT,CreateManifest" description="Make rbtGenericCache.jar">
+        <delete file="${basedir}/../output/rbtGenericCache.jar"/>
+		<copy todir="${basedir}/../output/classes/com/onmobile/apps/ringbacktones/genericcache/">
+				<fileset dir="${basedir}/src/com/onmobile/apps/ringbacktones/genericcache/">
+					<include name="**/*.xml"/>
+				</fileset>
+		</copy>
+		<jar destfile="${basedir}/../output/rbtGenericCache.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/../output/classes/">
+				<include name="com/onmobile/apps/ringbacktones/genericcache/**"/>
+			</fileset>
+			<fileset dir="${basedir}/../config/genericCacheConfig/common/"  includes="rbt-cache-beans.xml"/>
+	    </jar>
+    </target>
+	
+	<target name="makeRbtCommonJar" depends="compileRBT,CreateManifest" description="Make rbtCommon.jar">
+        <jar destfile="${basedir}/../output/rbtCommon.jar" manifest="MANIFEST.MF">
+            <fileset dir="${basedir}/../output/classes">
+				<include name="com/onmobile/apps/ringbacktones/common/**"/>
+				<include name="com/onmobile/apps/ringbacktones/common/hibernate/**"/>
+				<include name="com/onmobile/apps/ringbacktones/rbtCommon/**"/>
+			</fileset>
+        </jar>
+		<!--<copy file="${basedir}/output/rbtCommon.jar" todir="${basedir}/lib"/>-->
+    </target>
+	<!-- Regular build targets -->
+	<target name="clean"  description="Remove sub-directories from the output directory leaving the jar and war files.">
+		<delete dir="${basedir}/../output/ccc/"/>
+		<delete dir="${basedir}/../output/rbt/"/>
+		<delete dir="${basedir}/../output/maxis/"/>
+		<delete dir="${basedir}/../output/classes/"/>
+		<delete dir="${basedir}/../output/voicejar/"/>
+		<delete dir="${basedir}/../output/virgin/"/>
+	</target>
+
+</project>

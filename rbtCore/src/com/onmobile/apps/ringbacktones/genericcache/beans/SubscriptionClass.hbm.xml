@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.SubscriptionClass" table="RBT_SUBSCRIPTION_CLASS">
+		<id name="subscriptionClass" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString">
+			<column name="SUBSCRIPTION_CLASS" not-null="true" />
+		</id>
+
+		<property column="CIRCLE_ID" length="50" name="circleID" type="java.lang.String" />
+		<property column="SUBSCRIPTION_AMOUNT" length="10" name="subscriptionAmount" type="java.lang.String" />
+		<property column="RENEWAL_AMOUNT" length="10" name="renewalAmount" type="java.lang.String" />
+		<property column="SUBSCRIPTION_PERIOD" length="10" name="subscriptionPeriod" type="java.lang.String" />
+		<property column="RENEWAL_PERIOD" length="10" name="renewalPeriod" type="java.lang.String" />
+		<property column="SUBSCRIPTION_RENEWAL" length="5" name="subscriptionRenewal" type="java.lang.String" />
+		<property column="SMS_ON_SUBSCRIPTION" length="160" name="smsOnSubscription" type="java.lang.String" />
+		<property column="SMS_ON_SUBSCRIPTION_FAILURE" length="160" name="smsOnSubscriptionFailure" type="java.lang.String" />
+		<property column="SMS_ALERT_BEFORE_RENEWAL" length="160" name="smsAlertBeforeRenewal" type="java.lang.String" />
+		<property column="SMS_RENEWAL_SUCCESS" length="160" name="smsRenewalSuccess" type="java.lang.String" />
+		<property column="RETRY_PERIOD" name="retryPeriod" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="OPERATOR_CODE1" length="10" name="operatorCode1" type="java.lang.String" />
+		<property column="OPERATOR_CODE2" length="10" name="operatorCode2" type="java.lang.String" />
+		<property column="OPERATOR_CODE3" length="10" name="operatorCode3" type="java.lang.String" />
+		<property column="OPERATOR_CODE4" length="10" name="operatorCode4" type="java.lang.String" />
+		<property column="GRACE_PERIOD" name="gracePeriod" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="CHARGE_AFTER_SUBSCRIPTION" length="5" name="chargeAfterSubscription" type="java.lang.String" />
+		<property column="SMS_RENEWAL_FAILURE" length="160" name="smsRenewalFailure" type="java.lang.String" />
+		<property column="SMS_ALERT_RETRY" length="160" name="smsAlertRetry" type="java.lang.String" />
+		<property column="SMS_ALERT_GRACE" length="160" name="smsAlertGrace" type="java.lang.String" />
+		<property column="SMS_DEACT_FAILURE" length="160" name="smsDeactFailure" type="java.lang.String" />
+		<property column="AUTO_DEACTIVATION_PERIOD" name="autoDeactivationPeriod" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="SHOW_ON_GUI" length="5" name="showOnGui" type="java.lang.String" />
+		<property column="FREE_SELECTIONS" name="freeSelections" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+	</class>
+</hibernate-mapping>

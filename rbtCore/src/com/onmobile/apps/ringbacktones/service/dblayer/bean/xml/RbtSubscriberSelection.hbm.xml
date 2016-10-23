@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.bean.RbtSubscriberSelection" table="RBT_SUBSCRIBER_SELECTIONS">
+		
+		<id name="refId" type="long" column="INTERNAL_REF_ID" />
+		</id>
+       	<property column="SUBSCRIBER_ID" name="subscriberId" type="string" />
+		<property column="TYPE" name="callerId" type="string" />
+		<property column="STATUS" name="categoryId" type="integer" />
+		<property column="EXTRA_INFO" name="subscriberWavFile" type="string" />
+		<property column="MODE" name="setTime" type="timestamp" />
+		<property column="MODE_INFO" name="startTime" type="timestamp" />
+		<property column="TRANS_ID" name="endTime" type="timestamp" />
+		<property column="CHARGING_CLASS" name="status" type="integer" />
+		<property column="CREATION_TIME" name="chargeClass" type="timestamp" />
+		<property column="NEXT_RETRY_TIME" name="selectedBy" type="string" />
+		<property column="RETRY_COUNT" name="selectionInfo" type="string" />
+		<property column="SUBSCRIBER_ID" name="nextChargingDate" type="timestamp" />
+		<property column="TYPE" name="prepaidYes" type="string" />
+		<property column="STATUS" name="fromTime" type="integer" />
+		<property column="EXTRA_INFO" name="toTime" type="integer" />
+		<property column="MODE" name="selStatus" type="string" />
+		<property column="MODE_INFO" name="deselectedBy" type="string" />
+		<property column="TRANS_ID" name="oldClassType" type="string" />
+		<property column="CHARGING_CLASS" name="categoryType" type="integer" />
+		<property column="CREATION_TIME" name="loopStatus" type="character" />
+		<property column="NEXT_RETRY_TIME" name="selType" type="integer" />
+		<property column="RETRY_COUNT" name="selInterval" type="string" />
+		<property column="RETRY_COUNT" name="extraInfo" type="string" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.bean.RbtSubscriberActivityCount" table="RBT_SUBSCRIBER_ACTIVITY_COUNTS">
+		
+		<composite-id name="SubscriberActivityCountPK" class="com.onmobile.apps.ringbacktones.service.dblayer.bean.primaryKey.SubscriberActivityCountPK" > 
+       		<key-property name="subscriberID" column="SUBSCRIBER_ID" type="string" />
+       		<key-property name="date" column="ACTIVITY_DATE" type="string"/> 
+       </composite-id> 
+       
+       	<property column="COUNTS" name="counts" type="string" />
+	</class>
+</hibernate-mapping>

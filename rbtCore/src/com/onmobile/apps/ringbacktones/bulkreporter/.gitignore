@@ -1,0 +1,11 @@
+/BulkActReportDownloader.class
+/BulkActivationReporter$BulkActivationReporterTask.class
+/BulkActivationReporter.class
+/RecommendationReportDownloader.class
+/ReportDownloader.class
+/Reporter.class
+/SendBulkActivationReports$BulkPromoFileFilter.class
+/SendBulkActivationReports.class
+/SendMail$SMTPAuthenticator.class
+/SendMail.class
+/ZipFiles.class

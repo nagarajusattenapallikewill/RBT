@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.BulkPromo" table="RBT_BULK_PROMO">
+		<id name="bulkPromoID" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString">
+			<column name="BULK_PROMO_ID" not-null="true" />
+		</id>
+
+		<property column="PROMO_START_DATE" name="smsStartDate" type="java.sql.Timestamp" />
+		<property column="PROMO_END_DATE" name="smsEndDate" type="java.sql.Timestamp" />
+		<property column="PROCESSED_DEACTIVATION" length="1" name="processedDeactivation" type="java.lang.String" />
+		<property column="COS_ID" length="10" name="cosID" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

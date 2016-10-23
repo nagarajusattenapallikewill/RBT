@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.beans.RbtPickOfTheDay" table="RBT_PICK_OF_THE_DAY">
+		
+		<composite-id name="PickOfDayPK" class="com.onmobile.apps.ringbacktones.service.dblayer.beans.primaryKey.PickOfDayPK" > 
+       		<key-property name="playDate" column="PLAY_DATE" type="string" />
+       		<key-property name="circleId" column="CIRCLE_ID" type="string"/> 
+       </composite-id> 
+       
+      	<property column="CATEGORY_ID" name="categoryId" type="integer" />
+		<property column="CLIP_ID" name="clipId" type="integer" />
+		<property column="PREPAID_YES" name="prepaidYes" type="character" />
+		<property column="PROFILE" name="profile" type="string" />
+		<property column="LANGUAGE" name="language" type="string" />
+	</class>
+</hibernate-mapping>

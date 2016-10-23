@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SubscriberDO" targetNamespace="http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service">
+				
+			
+			<xsd:element name="deactivateSubscriber">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="1" minOccurs="1" name="subscriberID" type="xsd:long"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="action" type="xsd:string"/>
+						<xsd:element maxOccurs="1" minOccurs="1" name="modeInfo" type="xsd:string"/>						
+						<xsd:element maxOccurs="1" minOccurs="1" name="mode" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			
+			<xsd:element name="subscriberResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Rbt">
+							<xsd:complexType>
+								<xsd:sequence>
+								    <xsd:element name="response"/>
+									<xsd:element name="Subscriber">
+										<xsd:complexType>
+											<xsd:attribute name="voluntary" type="xsd:string"/>
+											<xsd:attribute name="accessCount" type="xsd:string"/>
+											<xsd:attribute name="activatedBy" type="xsd:string"/>
+											<xsd:attribute name="canAllow" type="xsd:string"/>
+											<xsd:attribute name="circleId" type="xsd:string"/>
+											<xsd:attribute name="cosId" type="xsd:int"/>
+											<xsd:attribute name="isPrepaid" type="xsd:string"/>
+											<xsd:attribute name="isValidPrefix" type="xsd:string"/>
+											<xsd:attribute name="language" type="xsd:string"/>
+											<xsd:attribute name="nextBillingDate" type="xsd:long"/>
+											<xsd:attribute name="refId" type="xsd:string"/>
+											<xsd:attribute name="status" type="xsd:string"/>
+											<xsd:attribute name="subscriebrId" type="xsd:long"/>
+											<xsd:attribute name="subscriptionClass" type="xsd:string"/>
+											<xsd:attribute name="userType" type="xsd:string"/>											
+										</xsd:complexType>
+									</xsd:element>									
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+            
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="deactivateSubscriberRequest">
+    <wsdl:part name="parameters" element="tns:deactivateSubscriber">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="subscriberResponse">
+    <wsdl:part name="parameters" element="tns:subscriberResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SubscriberDO">
+    <wsdl:operation name="deactivateSubscriber">
+      <wsdl:input message="tns:deactivateSubscriberRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:subscriberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SubscriberDOSOAP" type="tns:SubscriberDO">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deactivateSubscriber">
+      <soap:operation soapAction="http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SubscriberDO">
+    <wsdl:port name="SubscriberDOSOAP" binding="tns:SubscriberDOSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

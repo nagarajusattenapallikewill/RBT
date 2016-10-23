@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.RbtSupport" table="RBT_SUPPORT" lazy="false">
+		<id name="id" column="SEQUENCE_ID" unsaved-value="0" type="java.lang.Long"><generator class="increment"/></id>
+        <property column="SUBSCRIBER_ID" name="subscriberId" type="java.lang.Long" />
+        <property column="CALLER_ID" name="callerId" type="java.lang.Long" />
+        <property column="CLIP_ID" name="clipId" type="java.lang.Integer" />
+		<property column="REQUEST_DATE" name="requestDate" type="java.sql.Timestamp" />		
+		<property column="TYPE" name="type" type="java.lang.Integer" />
+		<property column="STATUS" name="status" type="java.lang.Integer" />
+		<property column="EXTRA_INFO" name="extraInfo" length="500" type="java.lang.String" />
+		
+<!-- 	
+		<property column="RETRY_COUNT" name="retryCount" type="java.lang.Integer" />
+		<property column="KEYPRESSED" name="keyPressed" length="20" type="java.lang.String" />
+		<property column="INFO" name="info" length="150" type="java.lang.String" />
+		
+ -->
+	</class>
+</hibernate-mapping>

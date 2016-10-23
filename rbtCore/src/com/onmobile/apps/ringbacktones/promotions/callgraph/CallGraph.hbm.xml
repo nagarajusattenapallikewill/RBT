@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.promotions.callgraph.CallGraph"
+		select-before-update="true" table="RBT_CALLGRAPH">
+		<id column="CALLGRAPH_ID" name="callGraphID" type="long" >
+			<generator class="native"></generator> 
+		</id>
+		<property column="SUBSCRIBER_ID" name="subscriberID" length="500" type="java.lang.String" />
+		<property column="CALLERS_DETAILS" name="callersDetails" length="4096" >
+			<type name="com.onmobile.apps.ringbacktones.common.hibernate.CollectionType">
+				<param name="collectionType">java.util.HashMap&lt;java.lang.String, java.util.TreeSet&lt;java.lang.Long&gt;&gt;</param>
+			</type>
+		</property>	
+		<property column="FREQUENT_CALLERS" name="frequentCallers" length="1024" >
+			<type name="com.onmobile.apps.ringbacktones.common.hibernate.CollectionType">
+				<param name="collectionType">java.util.TreeSet&lt;java.lang.String&gt;</param>
+			</type>
+		</property>	
+		<property column="CREATED_TIME" name="createdTime" type="java.util.Date" update="false"/>
+		<property column="UPDATED_TIME" name="updatedTime" type="java.util.Date" />
+		<property column="CONFIRMED_FOR_PROMOTION" name="confirmedForPromotion" type="boolean" />
+		<property column="PROMOTION_CONFIRMED_TIME" name="promotionConfirmedTime" type="java.util.Date" />
+		<property column="PROMOTED_TIME" name="promotedTime" type="java.util.Date" />
+		<property column="RBT_CLIP_ID" name="rbtClipID" type="int" />
+		<property column="PROMOTION_STATUS" name="promotionStatus" >
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.onmobile.apps.ringbacktones.promotions.callgraph.CallGraph$PromotionStatus</param>
+			</type>
+		</property>	
+	</class>
+</hibernate-mapping>

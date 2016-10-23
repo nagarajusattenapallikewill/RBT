@@ -1,0 +1,33 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SIPR_RBT WSDL service -->
+
+  <service name="SIPR_RBT" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://localhost/SIPR_RBT.wsdl"/>
+      <parameter name="wsdlServiceElement" value="SIPR_RBT"/>
+      <parameter name="schemaUnqualified" value="http://localhost/SIPR_RBT.wsdl"/>
+      <parameter name="wsdlServicePort" value="SIPR_RBT"/>
+      <parameter name="className" value="com.onmobile.apps.ringbacktones.thirdparty.tefspain.SIPR_RBTBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="SIPR_RBTPortType"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <arrayMapping
+        xmlns:ns="http://localhost/SIPR_RBT.wsdl"
+        qname="ns:ArrayOf_xsd_string"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.UgcClip"
+		select-before-update="true" table="RBT_UGC_CLIPS">
+		<id column="CLIP_ID" name="clipId" type="int"><generator class="identity"/></id>		
+		<property column="CLIP_NAME" length="50" name="clipName" type="com.onmobile.apps.ringbacktones.rbtcontents.beans.UTF8String" />
+		<property column="ALBUM" length="50" name="album" type="java.lang.String" />
+		<property column="LANGUAGE" length="50" name="language" type="java.lang.String" />
+		<property column="ARTIST" length="50" name="artist" type="java.lang.String" />
+		<property column="CLIP_RBT_WAV_FILE" length="500" name="clipRbtWavFile" type="java.lang.String"/>
+		<property column="CLIP_PROMO_ID" length="50" name="clipPromoId" type="java.lang.String" />
+		<property column="CLIP_CREATION_TIME" name="clipStartTime" type="java.util.Date" />
+		<property column="CLIP_END_TIME" name="clipEndTime" type="java.util.Date" />
+		<property column="SUBSCRIBER_ID" length="50" name="subscriberId" type="java.lang.String" />
+		<property column="CATEGORY_ID" name="categoryId" type="int" />
+		<property column="PARENT_CATEGORY_ID" name="parentCategoryId" type="int" />
+		<property column="RIGHTS_BODY" name="rightsBody" type="int" />
+		<property column="PUBLISHER" length="10" name="publisher" type="java.lang.String" />
+		<property column="CLIP_STATUS" name="clipStatus" type="char" />
+		<property column="CLIP_EXTRA_INFO" length="500" name="clipExtraInfo" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

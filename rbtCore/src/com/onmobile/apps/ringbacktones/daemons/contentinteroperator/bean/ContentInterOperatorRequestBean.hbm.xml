@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.daemons.contentinteroperator.bean.ContentInterOperatorRequestBean" table="RBT_THIRD_PARTY_REQUESTS">
+		<meta attribute="class-description">
+			This class contains the content inter operator requests.
+		</meta>
+		
+		
+		<!--
+		SEQUENCE_ID
+		STATUS
+		MSISDN
+		OPERATOR_ID
+		SOURCE_CONTENT_ID
+		SOURCE_CONTENT_OPERATOR
+		TARGET_CONTENT_ID
+		ADD_IN_LOOP
+		SUB_CHARGE
+		CONTENT_CHARGE
+		REQUEST_TIME
+		MNP_REQUEST_TIME
+		MNP_RESPONSE_TIME
+		CONTENT_RESOLVE_TIME
+		REQUEST_TRANSFER_TIME
+		MNP_REQUEST_TYPE
+		MNP_RESPONSE_TYPE
+		MODE
+		REQUEST_TYPE
+		EXTRA_INFO
+		
+		
+		status:
+			0=new
+			1=msisdn operator identification pending
+			2=msisdn operator identified success
+			3=msisdn operator identification failed
+			4=content identified success
+			5=content identified failed
+			6=request transferred success
+			7=request transferred failed
+			
+		-->
+		
+		<id name="sequenceID" type="long" column="SEQUENCE_ID">
+			<generator class="native"/>
+		</id>
+		
+		<property name="status" type="integer" column="STATUS" />
+		<property name="msisdn" type="string" column="MSISDN" />
+		<property name="operatorID" type="integer" column="OPERATOR_ID" />
+		<property name="sourceContentID" type="string" column="SOURCE_CONTENT_ID" />
+		<property name="sourceContentOperator" type="string" column="SOURCE_CONTENT_OPERATOR" />
+		<property name="targetContentID" type="string" column="TARGET_CONTENT_ID" />
+		<property name="addInLoop" type="string" column="ADD_IN_LOOP" />
+		<property name="subCharge" type="string" column="SUB_CHARGE"  />
+		<property name="contentCharge" type="string" column="CONTENT_CHARGE"  />
+		<property name="requestTime" type="timestamp" column="REQUEST_TIME"  />
+		<property name="mnpRequestTime" type="timestamp" column="MNP_REQUEST_TIME"  />
+		<property name="mnpResponseTime" type="timestamp" column="MNP_RESPONSE_TIME"  />
+		<property name="contentResolveTime" type="timestamp" column="CONTENT_RESOLVE_TIME"  />
+		<property name="requestTransferTime" type="timestamp" column="REQUEST_TRANSFER_TIME"  />
+		<property name="mnpRequestType" type="string" column="MNP_REQUEST_TYPE"  />
+		<property name="mnpResponseType" type="string" column="MNP_RESPONSE_TYPE"  />
+		<property name="mode" type="string" column="MODE" />
+		<property name="modeInfo" type="string" column="MODE_INFO" />
+		<property name="requestType" type="string" column="REQUEST_TYPE" />
+		<property name="extraInfo" type="string" column="EXTRA_INFO" />
+	</class>
+</hibernate-mapping>

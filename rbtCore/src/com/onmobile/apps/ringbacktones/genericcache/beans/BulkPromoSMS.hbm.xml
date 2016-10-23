@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.BulkPromoSMS" table="RBT_BULK_PROMO_SMS">
+		<composite-id>
+			<key-property name="bulkpromoID" column="BULK_PROMO_ID" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="smsDate" column="SMS_DATE" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+		</composite-id>
+
+		<property column="SMS_TEXT" length="300" name="smsText" type="java.lang.String" />
+		<property column="SMS_SENT" length="1" name="smsSent" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

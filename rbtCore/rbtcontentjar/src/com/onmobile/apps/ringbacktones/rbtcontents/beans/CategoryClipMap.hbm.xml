@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.CategoryClipMap" select-before-update="true" table="RBT_CATEGORY_CLIP_MAP">
+		<composite-id>
+			<key-property column="CATEGORY_ID" name="categoryId" type="int" />
+			<key-property column="CLIP_ID" name="clipId" type="int" />
+		</composite-id>
+		<property column="CLIP_IN_LIST" name="clipInList" type="char" />
+		<property column="CATEGORY_CLIP_INDEX" name="clipIndex" type="int" />
+		<property column="PLAY_TIME" length="50" name="playTime" type="java.lang.String" />
+	</class>
+</hibernate-mapping>

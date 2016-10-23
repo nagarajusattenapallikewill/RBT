@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.RBTText" table="RBT_TEXT" lazy="false">
+		<composite-id>
+			<key-property name="type" column="TYPE" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="subType" column="SUB_TYPE" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+			<key-property name="language" column="LANGUAGE" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString"/>
+		</composite-id>
+
+		<property column="TEXT" length="512" name="text" type="com.onmobile.apps.ringbacktones.genericcache.datatype.UTF8String" />
+	</class>
+</hibernate-mapping>

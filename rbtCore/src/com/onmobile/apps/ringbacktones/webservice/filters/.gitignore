@@ -1,0 +1,14 @@
+/AllowFilter.class
+/ContentFilter$CategoryType.class
+/ContentFilter$ContentType.class
+/ContentFilter.class
+/DontAllowFilter.class
+/Filter.class
+/FilterAttribute.class
+/FilterCondition$ConditionType.class
+/FilterCondition.class
+/RbtFilter.class
+/RbtFilterParser.class
+/SelectionFilter$SelectionType.class
+/SelectionFilter.class
+/SubscriptionClassFilter.class

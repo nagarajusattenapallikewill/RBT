@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST) -->
+<serviceGroup>
+    <service name="SubscriberDO">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.onmobile.apps.ringbacktones.wsdl.tef_ecuador.v1_0.service.SubscriberDOMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">com.onmobile.apps.ringbacktones.wsdl.tef_ecuador.v1_0.service.impl.SubscriberDOSkeletonImpl</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="deactivateSubscriber" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service">
+            <actionMapping>http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service/deactivateSubscriber</actionMapping>
+            <outputActionMapping>http://apps.onmobile.com/ringbacktones/wsdl/tef_ecuador/V1_0/service/SubscriberDO/deactivateSubscriberResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

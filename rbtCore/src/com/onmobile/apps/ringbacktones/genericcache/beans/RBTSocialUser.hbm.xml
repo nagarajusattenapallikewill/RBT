@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.RBTSocialUser" table="rbt_social_user">
+				
+		<id name="id" column="SEQUENCE_ID" unsaved-value="0" type="java.lang.Long"><generator class="increment"/></id>
+        <property column="MSISDN" length="50" name="msisdn" type="java.lang.String" />
+        <property column="USER_ID" length="50" name="userId" type="java.lang.String" />
+		<property column="SOCIAL_TYPE" name="socialType" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCInteger" />
+		<property column="START_TIME" name="startTime" type="java.sql.Timestamp" />
+		<property column="END_TIME" name="endTime" type="java.sql.Timestamp" />
+		<property column="RBT_TYPE" length="20" name="RBTType" type="java.lang.String" />
+		 
+		 
+	</class>
+</hibernate-mapping>

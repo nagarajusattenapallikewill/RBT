@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!--
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rbt</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">onmobile</property>
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="hibernate.default_schema">rbt</property>
+		<property name="hibernate.show_sql">true</property>
+		-->
+
+		<property name="hibernate.connection.driver_class">com.sap.dbtech.jdbc.DriverSapDB</property>
+		<property name="hibernate.connection.url">jdbc:sapdb://172.16.29.216</property>
+		<property name="hibernate.connection.username">onmobile</property>
+		<property name="hibernate.connection.password">onmobile</property>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.SAPDBDialect</property>
+		<property name="hibernate.default_schema">rbt</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- <property name="hibernate.hbm2ddl.auto">validate</property> -->
+
+		<property name="hibernate.c3p0.acquire_increment">5</property>
+		<property name="hibernate.c3p0.idle_test_period">75</property>	<!-- In Seconds-->
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.max_statements">10</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.timeout">100</property>	<!-- In Seconds-->
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<!-- Disable the second-level cache  -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/Clip.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/ClipInfo.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/Category.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/CategoryInfo.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/CategoryClipMap.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/CircleCategoryMap.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/Circle.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/PromoMaster.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/UgcClip.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/RbtSocialContentPublisherSapDB.hbm.xml"/>
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/ClipRating.hbm.xml" />
+		<mapping resource="com/onmobile/apps/ringbacktones/rbtcontents/beans/ClipRatingTransaction.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

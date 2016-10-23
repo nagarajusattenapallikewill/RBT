@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.rbtcontents.beans.ClipRating" select-before-update="true" table="RBT_CLIP_RATING">
+		<id column="CLIP_ID" name="clipId" type="int"></id>
+		<property column="NO_OF_VOTES" name="noOfVotes" type="int" />
+		<property column="SUM_OF_RATINGS" name="sumOfRatings" type="int" />
+		<property column="LIKE_VOTES" name="likeVotes" type="int" />
+		<property column="DISLIKE_VOTES" name="dislikeVotes" type="int" />
+	</class>
+</hibernate-mapping>

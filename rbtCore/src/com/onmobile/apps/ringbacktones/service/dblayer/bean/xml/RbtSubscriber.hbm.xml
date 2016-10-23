@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.service.dblayer.bean.RbtSubscriber" table="RBT_SUBSCRIBER">
+		
+		<id name="subscriberId" type="string" column="SUBSCRIBER_ID" />
+		</id>
+       	<property column="ACTIVATED_BY" name="activatedBy" type="string" />
+		<property column="DEACTIVATED_BY" name="deactivatedBy" type="string" />
+		<property column="START_DATE" name="startDate" type="timestamp" />
+		<property column="END_DATE" name="endDate" type="timestamp" />
+		<property column="PREPAID_YES" name="prepaidYes" type="string" />
+		<property column="LAST_ACCESS_DATE" name="lastAccessDate" type="timestamp" />
+		<property column="NEXT_CHARGING_DATE" name="nextChargingDate" type="timestamp" />
+		<property column="NUM_VOICE_ACCESS" name="numVoiceAccess" type="integer" />
+		<property column="ACTIVATION_INFO" name="activationInfo" type="string" />
+		<property column="SUBSCRIPTION_CLASS" name="subscriptionClass" type="string" />
+		<property column="SUBSCRIPTION_YES" name="subscriptionYes" type="string" />
+		<property column="LAST_DEACTIVATION_INFO" name="lastDeactivationInfo" type="string" />
+		<property column="LAST_DEACTIVATION_DATE" name="lastDeactivationDate" type="timestamp" />
+		<property column="ACTIVATION_DATE" name="activationDate" type="timestamp" />
+		<property column="NUM_MAX_SELECTIONS" name="numMaxSelections" type="integer" />
+		<property column="OLD_CLASS_TYPE" name="oldClassType" type="string" />
+		<property column="COS_ID" name="cosId" type="string" />
+		<property column="ACTIVATED_COS_ID" name="activatedCosId" type="string" />
+		<property column="RBT_TYPE" name="rbtType" type="integer" />
+		<property column="LANGUAGE" name="language" type="string" />
+		<property column="PLAYER_STATUS" name="playerStatus" type="character" />
+		<property column="AGE" name="age" type="integer" />
+		<property column="GENDER" name="gender" type="character" />
+		<property column="EXTRA_INFO" name="extraInfo" type="string" />
+		<property column="CIRCLE_ID" name="circleId" type="string" />
+		<property column="INTERNAL_REF_ID" name="refId" type="string" />
+	</class>
+</hibernate-mapping>

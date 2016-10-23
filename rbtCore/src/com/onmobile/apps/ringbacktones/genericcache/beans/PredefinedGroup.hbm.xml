@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.onmobile.apps.ringbacktones.genericcache.beans.PredefinedGroup" table="RBT_PREDEFINED_GROUPS" lazy="false">
+		<id name="preGroupID" type="com.onmobile.apps.ringbacktones.genericcache.datatype.GCString">
+			<column name="PRE_GROUP_ID" not-null="true" />
+		</id>
+
+		<property column="PRE_GROUP_NAME" length="128" name="preGroupName" type="com.onmobile.apps.ringbacktones.genericcache.datatype.UTF8String" />
+	</class>
+</hibernate-mapping>
